@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  restaurantID   Int     @id @default(autoincrement())
+  contactNumber  String?
+  email          String?
+  restaurantName String
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  username     String         @unique
+  password     String
+  phone        String
+  email        String
+  role         userRole
+  reservations Reservations[]
+}
+
+model Reservations {
+  id             Int                @id @default(autoincrement())
+  reservedById   Int
+  reservedBy     User               @relation(fields: [reservedById], references: [id])
+  detail         ReservationDetail?
+  reservedTables RestaurantTables[]
+}
+
+model ReservationDetail {
+  id            Int                         @id @default(autoincrement())
+  reservationID Int                         @unique
+  reservedItems ReservationDetailandItems[]
+  reservation   Reservations                @relation(fields: [reservationID], references: [id])
+}
+
+model RestaurantTables {
+  id            Int           @id @default(autoincrement())
+  status        bookingStatus
+  reservationID Int
+  reservation   Reservations  @relation(fields: [reservationID], references: [id])
+}
+
+model Items {
+  id          Int                         @id @default(autoincrement())
+  name        String
+  price       Float
+  reservedFor ReservationDetailandItems[]
+}
+
+model ReservationDetailandItems {
+  reservationdetailsID Int
+  itemsID              Int
+  itemSelected         Items             @relation(fields: [itemsID], references: [id])
+  reservedBy           ReservationDetail @relation(fields: [reservationdetailsID], references: [id])
+
+  @@id([reservationdetailsID, itemsID])
+}
+
+enum userRole {
+  admin
+  user
+}
+
+enum bookingStatus {
+  booked
+  unbooked
+}
