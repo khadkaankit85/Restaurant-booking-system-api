@@ -31,5 +31,4 @@ Follow these steps to set up and run the Restaurant API:
 
 ```
 User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> service.ts --> response --> router.ts --> app.ts --> User
-
 ```
