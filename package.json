@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch index.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
+    "dotenv": "^16.4.5",
     "express": "^4.21.0"
   }
 }
