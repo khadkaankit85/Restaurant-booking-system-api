@@ -8,66 +8,54 @@ datasource db {
 }
 
 model Restaurant {
-  restaurantID   Int     @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   contactNumber  String?
   email          String?
   restaurantName String
+  tables         Table[]
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  username     String         @unique
+  id           Int           @id @default(autoincrement())
+  username     String        @unique
   password     String
   phone        String
   email        String
-  role         userRole
-  reservations Reservations[]
+  role         UserRole
+  reservations Reservation[]
 }
 
-model Reservations {
-  id             Int                @id @default(autoincrement())
-  reservedById   Int
-  reservedBy     User               @relation(fields: [reservedById], references: [id])
-  detail         ReservationDetail?
-  reservedTables RestaurantTables[]
+model Reservation {
+  id            Int    @id @default(autoincrement())
+  reservedById  Int
+  reservedBy    User   @relation(fields: [reservedById], references: [id])
+  tableId       Int
+  table         Table  @relation(fields: [tableId], references: [id])
+  reservedItems Item[]
 }
 
-model ReservationDetail {
-  id            Int                         @id @default(autoincrement())
-  reservationID Int                         @unique
-  reservedItems ReservationDetailandItems[]
-  reservation   Reservations                @relation(fields: [reservationID], references: [id])
+model Table {
+  id           Int           @id @default(autoincrement())
+  status       BookingStatus
+  Restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
+  Reservation  Reservation[]
 }
 
-model RestaurantTables {
-  id            Int           @id @default(autoincrement())
-  status        bookingStatus
-  reservationID Int
-  reservation   Reservations  @relation(fields: [reservationID], references: [id])
+model Item {
+  id            Int          @id @default(autoincrement())
+  name          String
+  price         Float
+  Reservation   Reservation? @relation(fields: [reservationId], references: [id])
+  reservationId Int?
 }
 
-model Items {
-  id          Int                         @id @default(autoincrement())
-  name        String
-  price       Float
-  reservedFor ReservationDetailandItems[]
-}
-
-model ReservationDetailandItems {
-  reservationdetailsID Int
-  itemsID              Int
-  itemSelected         Items             @relation(fields: [itemsID], references: [id])
-  reservedBy           ReservationDetail @relation(fields: [reservationdetailsID], references: [id])
-
-  @@id([reservationdetailsID, itemsID])
-}
-
-enum userRole {
+enum UserRole {
   admin
   user
 }
 
-enum bookingStatus {
+enum BookingStatus {
   booked
   unbooked
 }
