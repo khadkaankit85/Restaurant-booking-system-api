@@ -25,29 +25,37 @@ model User {
   reservations Reservation[]
 }
 
-model Reservation {
-  id            Int    @id @default(autoincrement())
-  reservedById  Int
-  reservedBy    User   @relation(fields: [reservedById], references: [id])
-  tableId       Int
-  table         Table  @relation(fields: [tableId], references: [id])
-  reservedItems Item[]
-}
-
 model Table {
   id           Int           @id @default(autoincrement())
   status       BookingStatus
-  Restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
   restaurantId Int?
-  Reservation  Reservation[]
+  restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
+  reservations Reservation[]
+}
+
+model Reservation {
+  id            Int            @id @default(autoincrement())
+  reservedById  Int
+  reservedBy    User           @relation(fields: [reservedById], references: [id])
+  tableId       Int
+  table         Table          @relation(fields: [tableId], references: [id])
+  reservedItems ReservedItem[]
+}
+
+model ReservedItem {
+  reservationId Int
+  itemId        Int
+  item          Item        @relation(fields: [itemId], references: [id])
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+
+  @@id([reservationId, itemId])
 }
 
 model Item {
-  id            Int          @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   name          String
   price         Float
-  Reservation   Reservation? @relation(fields: [reservationId], references: [id])
-  reservationId Int?
+  reservedItems ReservedItem[]
 }
 
 enum UserRole {
