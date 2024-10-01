@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { createuserController } from "../controllers/user.controller";
-// import 
+import { createuserController, loginuserController } from "../controllers/user.controller";
+import { loginDataValidationMiddleware, signUpDataValidationMiddleware } from "../middlewares/userdata.validation";
 const router = Router()
-
-router.post("/signup",signUpDataValidationMiddleware,createuserController)
-// router.post("/login",loginDataValidationMiddleware,loginuserController)
+router.post("signup", signUpDataValidationMiddleware,createuserController)
+router.post("/login", loginDataValidationMiddleware,loginuserController)
 
 export default router

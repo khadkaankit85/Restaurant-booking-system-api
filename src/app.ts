@@ -10,7 +10,7 @@ app.use(express.urlencoded({
 }))
 
 // endpoint for /user
-app.post("/user",userRouter)
+app.use("/user", userRouter)
 
 //Routes go here:)
 
