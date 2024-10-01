@@ -2,10 +2,10 @@
 import { createuser } from "../services/user.services";
 import { user } from "../types/user";
 
-export const createuserController=async()=>{
-    createuser("a" as unknown as user) //check here later
-}
+export const createuserController = async () => {
+  //controller has full access to the services:)
+};
 
-export const loginuserController=async()=>{
-    console.log("you are logged in dude")
-}
+export const loginuserController = async () => {
+  console.log("you are logged in dude");
+};
