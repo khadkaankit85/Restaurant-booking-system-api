@@ -6,4 +6,12 @@ export interface user {
   email: string;
   role: "admin" | "user";
 }
-//other interfaces resides here:)
+
+export interface CreateUserRequest {
+  body: {
+    username: string;
+    password: string;
+    email: string;
+    phone?: string;
+  };
+}
