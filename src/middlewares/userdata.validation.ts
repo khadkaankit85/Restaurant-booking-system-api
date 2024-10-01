@@ -50,6 +50,7 @@ export const loginDataValidationMiddleware = [
     const error = validationResult(req);
     if (!error.isEmpty()) {
       res.status(400).json({ error: error.array() });
+      return;
     }
     next();
   },
