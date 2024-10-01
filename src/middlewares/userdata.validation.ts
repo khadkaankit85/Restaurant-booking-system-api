@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { check, validationResult } from "express-validator";
+import { check, checkSchema, validationResult } from "express-validator";
 
 // array of validator middlewares:)
 export const signUpDataValidationMiddleware = [
@@ -15,7 +15,10 @@ export const signUpDataValidationMiddleware = [
     .withMessage("Min length of password is 4"),
   check("email").isEmail().withMessage("Must be a valid email"),
 
-  check("phone").optional().isLength({max:10,min:10}).withMessage("Must be 10 in length"),
+  check("phone")
+    .optional()
+    .isLength({ max: 10, min: 10 })
+    .withMessage("Must be 10 in length"),
 
   //second middleware to check for the result of the query of previous validations:)
   (req: Request, res: Response, next: NextFunction) => {
@@ -28,4 +31,26 @@ export const signUpDataValidationMiddleware = [
   },
 ];
 
-export const loginDataValidationMiddleware = [];
+//array of middlewares to validate login request data
+export const loginDataValidationMiddleware = [
+  check("username")
+    .isString()
+    .withMessage("invalid username")
+    .isLength({ min: 5, max: 15 })
+    .withMessage("invalid username length")
+    .trim(),
+
+  check("password")
+    .isString()
+    .withMessage("Invalid password")
+    .isLength({ min: 4 }),
+
+  //to check for the validation result
+  (req: Request, res: Response, next: NextFunction) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      res.status(400).json({ error: error.array() });
+    }
+    next();
+  },
+];
