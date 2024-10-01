@@ -26,3 +26,10 @@ Follow these steps to set up and run the Restaurant API:
 
 5. **Access the Application**
    Open your browser and go to [http://localhost:3000](http://localhost:3000) to access the application.
+
+## Dataflow
+
+```
+User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> service.ts --> response --> router.ts --> app.ts --> User
+
+```
