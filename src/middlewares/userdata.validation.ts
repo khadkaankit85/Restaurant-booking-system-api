@@ -1,10 +1,16 @@
 import { Request,Response,NextFunction } from "express"
-export const signUpDataValidationMiddleware=async(req:Request,res:Response,next:NextFunction)=>{
-    console.log("validating signup data")
-    next()
-}
+import { check, validationResult} from "express-validator"
 
-export const loginDataValidationMiddleware=async(req:Request,res:Response,next:NextFunction)=>{
-    console.log("validating login data")
+// express validator chain for form data validation
+export const signUpDataValidationMiddleware=[
+ check("username").isString().withMessage("not a valid username").isLength({min:5,max:15}).withMessage("invalid lenght of username") ,
+ (req:Request,res:Response,next:NextFunction)=>{
+const error=validationResult(req)
+    if(!error.isEmpty()){
+        res.status(422).json({errors:error.array()});
+    }
     next()
-}
+ }
+]
+
+export const loginDataValidationMiddleware=[]
