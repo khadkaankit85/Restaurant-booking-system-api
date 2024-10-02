@@ -15,3 +15,10 @@ export interface CreateUserRequest {
     phone?: string;
   };
 }
+
+export interface LoginRequest {
+  body: {
+    username: string;
+    password: string;
+  };
+}

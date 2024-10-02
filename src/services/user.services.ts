@@ -17,3 +17,5 @@ export const createuser = async ({
     },
   });
 };
+
+export const finduser = async ({ username, password }: user) => {};
