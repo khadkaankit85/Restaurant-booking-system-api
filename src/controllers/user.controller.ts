@@ -1,6 +1,6 @@
 //logic to create, update and delete user:)
-import { createuser } from "../services/user.services";
-import { CreateUserRequest, user } from "../types/user";
+import { createuser, finduser } from "../services/user.services";
+import { CreateUserRequest, LoginRequest, user } from "../types/user";
 
 export const createuserController = async (
   req: Request & CreateUserRequest
@@ -13,6 +13,9 @@ export const createuserController = async (
   } as user);
 };
 
-export const loginuserController = async () => {
-  console.log("you are logged in dude");
+export const loginuserController = async (req: Request & LoginRequest) => {
+  finduser({
+    username: req.body.username,
+    // password:  hashedPassword,
+  } as user);
 };

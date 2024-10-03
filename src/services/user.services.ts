@@ -18,4 +18,12 @@ export const createuser = async ({
   });
 };
 
-export const finduser = async ({ username, password }: user) => {};
+export const finduser = async ({ username, password }: user) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      username: username,
+      password: password, //hashed password
+    },
+  });
+  return user;
+};
