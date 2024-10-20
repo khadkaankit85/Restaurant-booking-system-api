@@ -9,5 +9,6 @@ export const encryptPass = async (password: string): Promise<string> => {
 };
 
 export const comparePass = async (userPw: string, hashedPw: string) => {
-  bcrypt.compare(userPw, hashedPw).then((res) => res);
+  const match = await bcrypt.compare(userPw, hashedPw);
+  return match;
 };

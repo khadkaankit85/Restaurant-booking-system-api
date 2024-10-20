@@ -7,7 +7,7 @@ import {
 import { CreateUserRequest, LoginRequest, user } from "../types/user";
 
 import { Request, Response } from "express";
-import { encryptPass } from "../Utils/EncryptPw";
+import { comparePass, encryptPass } from "../Utils/EncryptPw";
 
 /**
  * Controller to handle user creation.
@@ -51,18 +51,20 @@ export const loginuserController = async (
   res: Response
 ): Promise<void> => {
   try {
-    const encryptedPassword = await encryptPass(req.body.password);
+    const encryptedPassword = req.body.password;
 
-    const user = await finduserWithPassword(
-      req.body.username,
-      encryptedPassword
-    );
+    const user = await finduserWithUsername(req.body.username);
     //#TODO: hash the password before comparing :)
 
     if (!user) {
-      res.status(401).send("Invalid credentials");
+      res.status(401).send("User doesn't exist ");
     } else {
-      res.status(200).send("You are logged in");
+      const passwordMatch = await comparePass(encryptedPassword, user.password);
+      if (passwordMatch) {
+        res.status(200).send("You are logged in");
+      } else {
+        res.status(401).send("invalid credentials");
+      }
     }
   } catch (error) {
     console.error(error);
