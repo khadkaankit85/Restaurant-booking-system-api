@@ -7,6 +7,7 @@ import {
 import { CreateUserRequest, LoginRequest, user } from "../types/user";
 
 import { Request, Response } from "express";
+import { encryptPass } from "../Utils/EncryptPw";
 
 /**
  * Controller to handle user creation.
@@ -25,9 +26,10 @@ export const createuserController = async (
     if (userExists) {
       res.status(409).send("Username already taken");
     } else {
+      const encryptedPassword = await encryptPass(req.body.password);
       await createuser({
         username: req.body.username,
-        password: req.body.password,
+        password: encryptedPassword,
         email: req.body.email,
         phone: req.body.phone,
       } as user);
@@ -49,9 +51,11 @@ export const loginuserController = async (
   res: Response
 ): Promise<void> => {
   try {
+    const encryptedPassword = await encryptPass(req.body.password);
+
     const user = await finduserWithPassword(
       req.body.username,
-      req.body.password
+      encryptedPassword
     );
     //#TODO: hash the password before comparing :)
 
