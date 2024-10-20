@@ -44,6 +44,24 @@ export const createuserController = async (
  * @param req - Request object with username and password properties.
  * @returns Promise resolving to the user object if the login is successful.
  */
-export const loginuserController = async (req: Request & LoginRequest) => {
-  finduserWithPassword(req.body.username, req.body.password); //#TODO: hash the password before comparing:)
+export const loginuserController = async (
+  req: Request & LoginRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const user = await finduserWithPassword(
+      req.body.username,
+      req.body.password
+    );
+    //#TODO: hash the password before comparing :)
+
+    if (!user) {
+      res.status(401).send("Invalid credentials");
+    } else {
+      res.status(200).send("You are logged in");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred during login");
+  }
 };

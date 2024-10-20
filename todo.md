@@ -22,7 +22,7 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
 
   - [ ] **User Endpoints**
     - [x] Create a user (sign-up).
-    - [ ] Authenticate a user (sign-in).
+    - [x] Authenticate a user (sign-in).
     - [ ] Update user information.
     - [ ] Delete a user.
     - [ ] Assign user roles.
