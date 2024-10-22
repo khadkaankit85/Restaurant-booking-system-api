@@ -22,3 +22,13 @@ export interface LoginRequest {
     password: string;
   };
 }
+
+export interface PasswordChangeRequest {
+  req: {
+    body: {
+      username: string;
+      oldpassword: string;
+      newpassword: string;
+    };
+  };
+}

@@ -98,7 +98,8 @@ export const updateUsername = async (
       username: oldusername,
     },
     data: {
-      username: newUsername,
+      username:
+        newUsername /******  5a3b581f-d5d4-4606-bac1-9d578a9b266b  *******/,
     },
   });
   return updateUser;

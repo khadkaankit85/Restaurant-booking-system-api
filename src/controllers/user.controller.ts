@@ -3,8 +3,14 @@ import {
   createuser,
   finduserWithPassword,
   finduserWithUsername,
+  updatePassword,
 } from "../services/user.services";
-import { CreateUserRequest, LoginRequest, user } from "../types/user";
+import {
+  CreateUserRequest,
+  LoginRequest,
+  PasswordChangeRequest,
+  user,
+} from "../types/user";
 
 import { Request, Response } from "express";
 import { comparePass, encryptPass } from "../Utils/EncryptPw";
@@ -50,28 +56,28 @@ export const createuserController = async (
  *          200 status code if the authentication is successful.
  */
 export const userAuthController = async (
-  req: Request & LoginRequest,
-  res: Response
-): Promise<void> => {
+  username: string,
+  password: string
+) => {
   try {
-    const encryptedPassword = req.body.password;
+    const encryptedPassword = password;
 
-    const user = await finduserWithUsername(req.body.username);
+    const user = await finduserWithUsername(username);
     //#TODO: hash the password before comparing :)
 
     if (!user) {
-      res.status(401).send("User doesn't exist ");
+      throw new Error("user not found");
     } else {
       const passwordMatch = await comparePass(encryptedPassword, user.password);
       if (passwordMatch) {
-        res.status(200).send("You are logged in");
+        return true;
       } else {
-        res.status(401).send("invalid credentials");
+        return false;
       }
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred during login");
+    throw new Error("user auth error " + error);
   }
 };
 
@@ -79,3 +85,27 @@ export const updateuserController = async (
   req: Request & CreateUserRequest,
   res: Response
 ): Promise<void> => {};
+
+export const changePasswordController = async (
+  req: Request & PasswordChangeRequest,
+  res: Response
+) => {
+  const oldpassword = req.body.oldpassword;
+  const newpassword = req.body.newpassword;
+  const username = req.body.username;
+
+  //  auth the user
+  const authentication = await userAuthController(username, oldpassword);
+  if (authentication) {
+    const newHashedPassword = await encryptPass(newpassword);
+    updatePassword(username, newHashedPassword);
+    return res.status(200).send("password changed successfully");
+  } else {
+    return res.status(400).send("Data validation error occurred");
+  }
+};
+
+export const changeUsernameController = async (
+  req: Request & LoginRequest,
+  res: Response
+) => {};
