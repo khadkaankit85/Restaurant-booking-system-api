@@ -60,3 +60,67 @@ export const finduserWithUsername = async (username: string) => {
   });
   return user;
 };
+
+/**
+ * Updates a user's phone number and email address.
+ *
+ * @param {string} phone - The new phone number.
+ * @param {string} email - The new email address.
+ * @param {number} id - The ID of the user to update.
+ * @returns {Promise<user>} The updated user object.
+ */
+export const updateUserDetail = async ({ phone, email, id }: user) => {
+  const updateUser = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: {
+      phone,
+      email,
+    },
+  });
+  return updateUser;
+};
+
+/**
+ * Updates a user's username.
+ *
+ * @param {string} oldusername - The current username of the user to update.
+ * @param {string} newUsername - The new username to assign to the user.
+ * @returns {Promise<user>} The updated user object.
+ */
+export const updateUsername = async (
+  oldusername: string,
+  newUsername: string
+) => {
+  const updateUser = await prisma.user.update({
+    where: {
+      username: oldusername,
+    },
+    data: {
+      username: newUsername,
+    },
+  });
+  return updateUser;
+};
+
+/**
+ * Updates a user's password in the database.
+ *
+ * @param {string} username - The username of the user to update.
+ * @param {string} newHashedPassword - The new hashed password.
+ * @returns {Promise<user>} The updated user object.
+ */
+export const updatePassword = async (
+  username: string,
+  newHashedPassword: string
+) => {
+  const updatePassword = await prisma.user.update({
+    where: {
+      username,
+    },
+    data: {
+      password: newHashedPassword,
+    },
+  });
+};

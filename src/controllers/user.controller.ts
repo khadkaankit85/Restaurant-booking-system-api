@@ -41,12 +41,15 @@ export const createuserController = async (
     res.status(500).send("An error occurred while creating the user");
   }
 };
+
 /**
- * Controller to handle user login.
+ * Controller to handle user authentication.
  * @param req - Request object with username and password properties.
- * @returns Promise resolving to the user object if the login is successful.
+ * @returns Promise resolving to a response with a 401 status code if the user
+ *          doesn't exist, a 401 status code if the password is invalid or a
+ *          200 status code if the authentication is successful.
  */
-export const loginuserController = async (
+export const userAuthController = async (
   req: Request & LoginRequest,
   res: Response
 ): Promise<void> => {
@@ -71,3 +74,8 @@ export const loginuserController = async (
     res.status(500).send("An error occurred during login");
   }
 };
+
+export const updateuserController = async (
+  req: Request & CreateUserRequest,
+  res: Response
+): Promise<void> => {};

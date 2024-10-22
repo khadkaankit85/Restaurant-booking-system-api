@@ -1,7 +1,8 @@
 import { Router } from "express";
 import {
   createuserController,
-  loginuserController,
+  userAuthController,
+  updateuserController,
 } from "../controllers/user.controller";
 import {
   loginDataValidationMiddleware,
@@ -10,6 +11,8 @@ import {
 const router = Router();
 
 router.post("/signup", signUpDataValidationMiddleware, createuserController);
-router.post("/login", loginDataValidationMiddleware, loginuserController);
+router.put("/update", signUpDataValidationMiddleware, updateuserController);
+
+router.post("/login", loginDataValidationMiddleware, userAuthController);
 
 export default router;
