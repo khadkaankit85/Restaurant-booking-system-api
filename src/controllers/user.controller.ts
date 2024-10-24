@@ -4,12 +4,14 @@ import {
   finduserWithPassword,
   finduserWithUsername,
   updatePassword,
+  updateUsername,
 } from "../services/user.services";
 import {
   CreateUserRequest,
   LoginRequest,
   PasswordChangeRequest,
   user,
+  UsernameChangeRequest,
 } from "../types/user";
 
 import { Request, Response } from "express";
@@ -106,6 +108,18 @@ export const changePasswordController = async (
 };
 
 export const changeUsernameController = async (
-  req: Request & LoginRequest,
+  req: Request & UsernameChangeRequest,
   res: Response
-) => {};
+) => {
+  const userExists = await finduserWithUsername(req.body.newUsername);
+  if (userExists) {
+    return res.status(400).send("Username alreaday taken");
+  } else {
+    updateUsername(req.body.oldUsername, req.body.newUsername);
+    return res
+      .status(200)
+      .send(
+        `Usename updated from ${req.body.oldUsername} to ${req.body.newUsername}`
+      );
+  }
+};

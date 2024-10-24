@@ -32,3 +32,12 @@ export interface PasswordChangeRequest {
     };
   };
 }
+export interface UsernameChangeRequest {
+  req: {
+    body: {
+      username: string;
+      oldUsernma: string;
+      newUsername: string;
+    };
+  };
+}
