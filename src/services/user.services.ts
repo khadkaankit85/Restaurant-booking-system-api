@@ -125,3 +125,15 @@ export const updatePassword = async (
     },
   });
 };
+export const deleteUser = async (username: string, password: string) => {
+  try {
+    const deleteUser = await prisma.user.delete({
+      where: {
+        username,
+        password,
+      },
+    });
+  } catch (e) {
+    throw new Error("couldnt delete the user");
+  }
+};
