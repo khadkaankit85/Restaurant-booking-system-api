@@ -24,20 +24,11 @@ export interface LoginRequest {
 }
 
 export interface PasswordChangeRequest {
-  req: {
-    body: {
-      username: string;
-      oldpassword: string;
-      newpassword: string;
-    };
-  };
+  username: string;
+  oldpassword: string;
+  newpassword: string;
 }
 export interface UsernameChangeRequest {
-  req: {
-    body: {
-      username: string;
-      oldUsernma: string;
-      newUsername: string;
-    };
-  };
+  oldUsername: string;
+  newUsername: string;
 }

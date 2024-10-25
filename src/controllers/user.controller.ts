@@ -90,38 +90,35 @@ export const updateuserController = async (
 ): Promise<void> => {};
 
 export const changePasswordController = async (
-  req: Request & PasswordChangeRequest,
+  req: Request,
   res: Response
-) => {
-  const oldpassword = req.body.oldpassword;
-  const newpassword = req.body.newpassword;
-  const username = req.body.username;
+): Promise<void> => {
+  const { oldpassword, newpassword, username } =
+    req.body as PasswordChangeRequest;
 
   //  auth the user
   const authentication = await userAuthController(username, oldpassword);
   if (authentication) {
     const newHashedPassword = await encryptPass(newpassword);
-    updatePassword(username, newHashedPassword);
-    return res.status(200).send("password changed successfully");
+    await updatePassword(username, newHashedPassword);
+    res.status(200).send("password changed successfully");
   } else {
-    return res.status(400).send("Data validation error occurred");
+    res.status(400).send("Data validation error occurred");
   }
 };
 
-export const changeUsernameController = async (
-  req: Request & UsernameChangeRequest,
-  res: Response
-) => {
-  const userExists = await finduserWithUsername(req.body.newUsername);
+export const changeUsernameController = async (req: Request, res: Response) => {
+  const { newUsername, oldUsername } = req.body as UsernameChangeRequest;
+  const userExists = await finduserWithUsername(newUsername);
   if (userExists) {
-    return res.status(400).send("Username alreaday taken");
+    res.status(400).send("Username alreaday taken");
+    return;
   } else {
-    updateUsername(req.body.oldUsername, req.body.newUsername);
-    return res
+    updateUsername(oldUsername, newUsername);
+    res
       .status(200)
-      .send(
-        `Usename updated from ${req.body.oldUsername} to ${req.body.newUsername}`
-      );
+      .send(`Usename updated from ${oldUsername} to ${newUsername}`);
+    return;
   }
 };
 
