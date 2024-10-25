@@ -30,6 +30,7 @@ export const signUpDataValidationMiddleware = [
     next();
   },
 ];
+
 export const updateDataValidationMiddleware = [
   //array of  middleware to validate different data
   check("username")
@@ -83,6 +84,7 @@ export const loginDataValidationMiddleware = [
     next();
   },
 ];
+
 export const changePassValidationMiddleware = [
   check("username")
     .isString()
@@ -111,6 +113,7 @@ export const changePassValidationMiddleware = [
     next();
   },
 ];
+
 export const changeUsernameValidationMiddleware = [
   check("oldUsername")
     .isString()

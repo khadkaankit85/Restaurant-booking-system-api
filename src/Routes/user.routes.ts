@@ -18,13 +18,19 @@ import {
 const router = Router();
 
 router.post("/signup", signUpDataValidationMiddleware, createuserController);
-router.put("/update", updateDataValidationMiddleware, updateuserController);
+
+router.put(
+  "/update-data",
+  updateDataValidationMiddleware,
+  updateuserController
+);
 
 router.put(
   "/change-password",
   changePassValidationMiddleware,
   changePasswordController
 );
+
 router.put(
   "/change-username",
   changeUsernameValidationMiddleware,
