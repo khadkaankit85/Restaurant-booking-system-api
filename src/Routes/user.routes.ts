@@ -5,6 +5,7 @@ import {
   updateuserController,
   changePasswordController,
   changeUsernameController,
+  deleteUserController,
 } from "../controllers/user.controller";
 import {
   loginDataValidationMiddleware,
@@ -28,6 +29,12 @@ router.put(
   "/change-username",
   changeUsernameValidationMiddleware,
   changeUsernameController
+);
+
+router.delete(
+  "/remove-user",
+  loginDataValidationMiddleware, //this route takes the same form data as login
+  deleteUserController
 );
 
 // router.post("/login", loginDataValidationMiddleware, userAuthController);
