@@ -139,8 +139,12 @@ export const deleteUserController = async (
 export const updateUserroleController = async (req: Request, res: Response) => {
   try {
     const { username, role } = req.body as user;
-    const updatedUser = await updateRole(username, role);
-    res.send(`role updated to ${role}`);
+    if (role == "admin" || role == "user") {
+      const updatedUser = await updateRole(username, role);
+      res.send(`role updated to ${role}`);
+    } else {
+      res.status(400).send("invalid role request");
+    }
   } catch {
     throw new Error("update role controller err");
   }

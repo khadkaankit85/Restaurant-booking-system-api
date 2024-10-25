@@ -137,3 +137,27 @@ export const changeUsernameValidationMiddleware = [
     next();
   },
 ];
+
+export const updateRoleValidationMiddleware = [
+  check("username")
+    .isString()
+    .withMessage("Invalid Username datatype")
+    .isLength({ min: 5, max: 15 })
+    .withMessage("Invalid username length"),
+
+  check("role")
+    .isString()
+    .withMessage("Invalid role datatype")
+    .isLength({ min: 4, max: 5 })
+    .withMessage("Invalid role length"),
+
+  //to check for the validation result
+  (req: Request, res: Response, next: NextFunction) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      res.status(400).json({ error: error.array() });
+      return;
+    }
+    next();
+  },
+];
