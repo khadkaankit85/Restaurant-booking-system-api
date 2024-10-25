@@ -5,6 +5,7 @@ import {
   finduserWithPassword,
   finduserWithUsername,
   updatePassword,
+  updateRole,
   updateUsername,
 } from "../services/user.services";
 import {
@@ -132,5 +133,15 @@ export const deleteUserController = async (
     res.status(200).send("user deleted");
   } catch {
     res.status(400).send("Unexpected error occrred");
+  }
+};
+
+export const updateUserroleController = async (req: Request, res: Response) => {
+  try {
+    const { username, role } = req.body as user;
+    const updatedUser = await updateRole(username, role);
+    res.send(`role updated to ${role}`);
+  } catch {
+    throw new Error("update role controller err");
   }
 };
