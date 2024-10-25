@@ -1,3 +1,4 @@
+import { UserRole } from "@prisma/client";
 import { prisma } from "../prisma/prismaClient";
 import { user } from "../types/user";
 /**
@@ -135,5 +136,18 @@ export const deleteUser = async (username: string, password: string) => {
     });
   } catch (e) {
     throw new Error("couldnt delete the user");
+  }
+};
+
+export const updateRole = async (username: string, role: UserRole) => {
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { username },
+      data: {
+        role,
+      },
+    });
+  } catch {
+    throw new Error("update role error");
   }
 };
