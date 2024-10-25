@@ -1,6 +1,7 @@
 //logic to create, update and delete user:)
 import {
   createuser,
+  deleteUser,
   finduserWithPassword,
   finduserWithUsername,
   updatePassword,
@@ -121,5 +122,18 @@ export const changeUsernameController = async (
       .send(
         `Usename updated from ${req.body.oldUsername} to ${req.body.newUsername}`
       );
+  }
+};
+
+export const deleteUserController = async (
+  req: Request & LoginRequest,
+  res: Response
+) => {
+  try {
+    const hashedPassword = await encryptPass(req.body.password);
+    deleteUser(req.body.username, hashedPassword);
+    res.status(200).send("user deleted");
+  } catch {
+    res.status(400).send("Unexpected error occrred");
   }
 };
