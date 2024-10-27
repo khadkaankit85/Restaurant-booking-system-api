@@ -32,3 +32,14 @@ Follow these steps to set up and run the Restaurant API:
 ```
 User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> service.ts --> response --> router.ts --> app.ts --> User
 ```
+
+## API Endpoints
+
+User Routes:
+-PUT /update-data - username, password, email, phone to update user data
+-PUT /change-password- username, oldpassword, newpassword to change password
+-PUT /change-username -oldUsername, newUsername to change username
+-PUT /upate-role - username, role to update role, only admin can update role
+-DELETE /remove-user- username, password to delete account.
+-POST /login - username, password to login
+-POST /signup - username, password, email, phone(optional) to signup.
