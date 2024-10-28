@@ -35,11 +35,32 @@ User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> se
 
 ## API Endpoints
 
-User Routes:
--PUT /update-data - username, password, email, phone to update user data
--PUT /change-password- username, oldpassword, newpassword to change password
--PUT /change-username -oldUsername, newUsername to change username
--PUT /upate-role - username, role to update role, only admin can update role
--DELETE /remove-user- username, password to delete account.
--POST /login - username, password to login
--POST /signup - username, password, email, phone(optional) to signup.
+### User Routes:
+
+- **PUT /update-data**  
+   Parameters: `username`, `password`, `email`, `phone`  
+   Description: Update user data
+
+- **PUT /change-password**  
+   Parameters: `username`, `oldpassword`, `newpassword`  
+   Description: Change password
+
+- **PUT /change-username**  
+   Parameters: `oldUsername`, `newUsername`  
+   Description: Change username
+
+- **PUT /update-role**  
+   Parameters: `username`, `role`  
+   Description: Update role (only admin can update role)
+
+- **DELETE /remove-user**  
+   Parameters: `username`, `password`  
+   Description: Delete account
+
+- **POST /login**  
+   Parameters: `username`, `password`  
+   Description: Login
+
+- **POST /signup**  
+   Parameters: `username`, `password`, `email`, `phone` (optional)  
+   Description: Signup

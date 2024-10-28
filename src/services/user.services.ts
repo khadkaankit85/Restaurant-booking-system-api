@@ -1,6 +1,7 @@
 import { UserRole } from "@prisma/client";
 import { prisma } from "../prisma/prismaClient";
 import { user } from "../types/user";
+import { restaurant } from "../types/restaurant";
 /**
  * Creates a new user in the database.
  *
@@ -147,7 +148,20 @@ export const updateRole = async (username: string, role: UserRole) => {
         role,
       },
     });
+  } catch (e) {
+    console.log("update role err");
+  }
+};
+
+export const updateRestaurantDetail = async (id = 1, newDetail: restaurant) => {
+  try {
+    const updatedRestaurant = await prisma.restaurant.update({
+      where: { id },
+      data: {
+        ...newDetail,
+      },
+    });
   } catch {
-    throw new Error("update role error");
+    console.log("update restaurant err");
   }
 };

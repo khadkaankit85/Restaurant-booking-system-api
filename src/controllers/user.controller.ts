@@ -5,6 +5,7 @@ import {
   finduserWithPassword,
   finduserWithUsername,
   updatePassword,
+  updateRestaurantDetail,
   updateRole,
   updateUsername,
 } from "../services/user.services";
@@ -18,6 +19,8 @@ import {
 
 import { Request, Response } from "express";
 import { comparePass, encryptPass } from "../Utils/EncryptPw";
+import { Restaurant } from "@prisma/client";
+import { restaurant } from "../types/restaurant";
 
 /**
  * Controller to handle user creation.
@@ -147,5 +150,22 @@ export const updateUserroleController = async (req: Request, res: Response) => {
     }
   } catch {
     throw new Error("update role controller err");
+  }
+};
+
+export const updateRestaurantDetailController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const newDetail = req.body.newDetail as Restaurant;
+    const updatedRestaurant = await updateRestaurantDetail(
+      1,
+      newDetail as restaurant
+    );
+    res.send("updated resturant detail");
+  } catch {
+    console.log("restaurant update error");
+    res.send("internal server error occurred");
   }
 };

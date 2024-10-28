@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { check, checkSchema, validationResult } from "express-validator";
+import { check, validationResult } from "express-validator";
 
 // array of validator middlewares:)
 export const signUpDataValidationMiddleware = [
@@ -156,6 +156,31 @@ export const updateRoleValidationMiddleware = [
     const error = validationResult(req);
     if (!error.isEmpty()) {
       res.status(400).json({ error: error.array() });
+      return;
+    }
+    next();
+  },
+];
+export const restaurantUpdateFormValidationMiddleware = [
+  check("contactNumber")
+    .isString()
+    .withMessage("Invalid contact number datatype")
+    .isLength({ min: 10, max: 15 })
+    .withMessage("Invalid contact number length"),
+
+  check("email").isEmail().withMessage("Must be a valid email"),
+
+  check("restaurantName")
+    .isString()
+    .withMessage("Invalid restaurant name datatype")
+    .isLength({ min: 3, max: 50 })
+    .withMessage("Invalid restaurant name length"),
+
+  //to check for the validation result
+  (req: Request, res: Response, next: NextFunction) => {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+      res.status(400).json({ errors: error.array() });
       return;
     }
     next();

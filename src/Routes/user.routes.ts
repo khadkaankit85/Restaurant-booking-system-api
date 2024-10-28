@@ -7,6 +7,7 @@ import {
   changeUsernameController,
   deleteUserController,
   updateUserroleController,
+  updateRestaurantDetailController,
 } from "../controllers/user.controller";
 import {
   loginDataValidationMiddleware,
@@ -15,6 +16,7 @@ import {
   changePassValidationMiddleware,
   changeUsernameValidationMiddleware,
   updateRoleValidationMiddleware,
+  restaurantUpdateFormValidationMiddleware,
 } from "../middlewares/userdata.validation";
 
 const router = Router();
@@ -43,6 +45,12 @@ router.put(
   "/upate-role",
   updateRoleValidationMiddleware,
   updateUserroleController
+);
+
+router.put(
+  "/update-restaurant",
+  restaurantUpdateFormValidationMiddleware,
+  updateRestaurantDetailController
 );
 
 router.delete(
