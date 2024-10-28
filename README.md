@@ -56,6 +56,10 @@ User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> se
    Parameters: `username`, `role`  
    Description: Update role (only admin can update role)
 
+- **PUT /update-restaurant**  
+   Parameters: `contactNumber`, `email` ,`restaurantName`  
+   Description: Update role (only admin can update role)
+
 - **DELETE /remove-user**  
    Parameters: `username`, `password`  
    Description: Delete account
