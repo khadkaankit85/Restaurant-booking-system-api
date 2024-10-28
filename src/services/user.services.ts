@@ -165,3 +165,14 @@ export const updateRestaurantDetail = async (id = 1, newDetail: restaurant) => {
     console.log("update restaurant err");
   }
 };
+
+export const getRestaurantDetail = async (id = 1) => {
+  try {
+    const resturant = await prisma.restaurant.findFirst({
+      where: { id },
+    });
+    return resturant;
+  } catch {
+    console.log("error in fniding restaurant data");
+  }
+};

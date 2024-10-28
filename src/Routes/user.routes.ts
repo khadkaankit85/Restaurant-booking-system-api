@@ -8,6 +8,7 @@ import {
   deleteUserController,
   updateUserroleController,
   updateRestaurantDetailController,
+  getRestaurantDataController,
 } from "../controllers/user.controller";
 import {
   loginDataValidationMiddleware,
@@ -20,6 +21,8 @@ import {
 } from "../middlewares/userdata.validation";
 
 const router = Router();
+
+router.get("/restaurant-data", getRestaurantDataController);
 
 router.post("/signup", signUpDataValidationMiddleware, createuserController);
 

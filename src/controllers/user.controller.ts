@@ -4,6 +4,7 @@ import {
   deleteUser,
   finduserWithPassword,
   finduserWithUsername,
+  getRestaurantDetail,
   updatePassword,
   updateRestaurantDetail,
   updateRole,
@@ -167,5 +168,18 @@ export const updateRestaurantDetailController = async (
   } catch {
     console.log("restaurant update error");
     res.send("internal server error occurred");
+  }
+};
+
+export const getRestaurantDataController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const restaurant = await getRestaurantDetail();
+    res.json(restaurant);
+  } catch {
+    console.log("restaurant update error");
+    res.status(400).send("internal server error occurred");
   }
 };

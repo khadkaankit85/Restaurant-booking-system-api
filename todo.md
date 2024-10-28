@@ -27,8 +27,8 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
     - [x] Delete a user.
     - [x] Assign user roles.
   - [ ] **Single Restaurant Endpoints**
-    - [ ] Add new details for the restaurant.
-    - [ ] Update restaurant information.
+    - [x] Add new details for the restaurant.
+    - [x] Update restaurant information.
     - [ ] Delete the restaurant.
     - [ ] Get restaurant details.
   - [ ] **Table Endpoints**
