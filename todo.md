@@ -9,7 +9,7 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
   - [x] Configure the Prisma client with MySQL.
   - [x] Set up the database connection using `DATABASE_URL`.
 
-- [ x ] **Create Database Models**
+- [x] **Create Database Models**
 
   - [x] Define the `Restaurant` model.
   - [x] Define the `User` model with roles (`admin`, `user`).
@@ -18,19 +18,18 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
   - [x] Define the `ReservedItem` model for items reserved during a reservation.
   - [x] Define the `Item` model.
 
-- [ ] **Implement API Endpoints**
+- [] **Implement API Endpoints**
 
-  - [ ] **User Endpoints**
+  - [x] **User Endpoints**
     - [x] Create a user (sign-up).
     - [x] Authenticate a user (sign-in).
     - [x] Update user information.
     - [x] Delete a user.
     - [x] Assign user roles.
-  - [ ] **Single Restaurant Endpoints**
+  - [x] **Single Restaurant Endpoints**
     - [x] Add new details for the restaurant.
     - [x] Update restaurant information.
-    - [ ] Delete the restaurant.
-    - [ ] Get restaurant details.
+    - [x] Get restaurant details.
   - [ ] **Table Endpoints**
     - [ ] Add a new table.
     - [ ] Update table status.

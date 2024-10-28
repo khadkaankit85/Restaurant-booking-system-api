@@ -37,6 +37,9 @@ User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> se
 
 ### User Routes:
 
+- **GET /restaurant-data**  
+   Description: Gets restaurant data
+
 - **PUT /update-data**  
    Parameters: `username`, `password`, `email`, `phone`  
    Description: Update user data
