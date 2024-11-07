@@ -61,3 +61,12 @@ export const updateReservation = async (
   });
   return reservation;
 };
+
+export const getReservationOfUser = async (userId: number) => {
+  const reservations = await prisma.reservation.findMany({
+    where: {
+      reservedById: userId,
+    },
+  });
+  return reservations;
+};

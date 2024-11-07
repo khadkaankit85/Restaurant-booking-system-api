@@ -1,6 +1,8 @@
 import {
+  deleteReservation,
   getAllReservations,
   getReservationById,
+  getReservationOfUser,
   updateReservation,
 } from "../services/reservation.services";
 import { Request, Response } from "express";
@@ -60,7 +62,20 @@ export const deleteReservationController = async (
   res: Response
 ) => {
   try {
-    res.send("delete reservation");
+    const deleted = await deleteReservation(parseInt(req.params.id));
+    res.send(deleted);
+  } catch {
+    res.status(400).send("internal server error occurred");
+  }
+};
+
+export const getReservationOfUserController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const reservations = await getReservationOfUser(parseInt(req.params.id));
+    res.json(reservations);
   } catch {
     res.status(400).send("internal server error occurred");
   }

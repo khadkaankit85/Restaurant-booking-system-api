@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createReservationValidationMiddleware,
   deleteReservationValidationMiddleware,
+  getReservationsByUserIDValidationMiddleware,
 } from "../middlewares/reservation.middleware";
 import { getReservationById } from "../services/reservation.services";
 import { create } from "domain";
@@ -37,4 +38,14 @@ router.post(
   updateReservationController
 );
 
+router.delete(
+  "/deleteReservation",
+  deleteReservationValidationMiddleware,
+  deleteReservationController
+);
+router.get(
+  "getReservationOfUser?userID",
+  getReservationsByUserIDValidationMiddleware,
+  getReservationByIdController
+);
 export default router;
