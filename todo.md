@@ -34,12 +34,12 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
     - [ ] Add a new table.
     - [ ] Update table status.
     - [ ] Delete a table.
-    - [ ] Get available tables for the restaurant.
-  - [ ] **Reservation Endpoints**
-    - [ ] Make a reservation.
-    - [ ] Update a reservation.
-    - [ ] Cancel a reservation.
-    - [ ] View reservations for a user.
+    - [x] Get available tables for the restaurant.
+  - [x] **Reservation Endpoints**
+    - [x] Make a reservation.
+    - [x] Update a reservation.
+    - [x] Cancel a reservation.
+    - [x] View reservations for a user.
   - [ ] **Item Endpoints**
     - [ ] Add new items to the menu.
     - [ ] Update item details.
