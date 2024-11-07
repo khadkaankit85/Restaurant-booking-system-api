@@ -41,10 +41,10 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
     - [x] Cancel a reservation.
     - [x] View reservations for a user.
   - [ ] **Item Endpoints**
-    - [ ] Add new items to the menu.
-    - [ ] Update item details.
-    - [ ] Delete items.
-    - [ ] Get a list of items.
+    - [x] Add new items to the menu.
+    - [x] Update item details.
+    - [x] Delete items.
+    - [x] Get a list of items.
 
 - [ ] **Authentication and Authorization**
 
