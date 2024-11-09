@@ -1,16 +1,12 @@
 import request from "supertest";
 import { Express } from "express";
 import { PrismaClient } from "@prisma/client";
-
-let app: Express;
+import app from "../../../src/app";
 
 const prisma = new PrismaClient();
 
-import express from "express";
-
 beforeAll(async () => {
   await prisma.$connect();
-  app = express();
   app.listen();
 });
 
