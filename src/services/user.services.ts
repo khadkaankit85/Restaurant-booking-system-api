@@ -2,16 +2,7 @@ import { UserRole } from "@prisma/client";
 import { prisma } from "../prisma/prismaClient";
 import { user } from "../types/user";
 import { restaurant } from "../types/restaurant";
-/**
- * Creates a new user in the database.
- *
- * @param {string} username - The username of the new user.
- * @param {string} password - The password of the new user.
- * @param {string} email - The email address of the new user.
- * @param {string} [phone] - The phone number of the new user.
- * @param {"user" | "admin"} [role="user"] - The role of the new user.
- * @returns {Promise<user>} The newly created user object.
- */
+
 export const createuser = async ({
   username,
   password,
@@ -23,7 +14,7 @@ export const createuser = async ({
     data: {
       username: username,
       password: password,
-      phone: phone,
+      phone: phone || "N/A",
       email: email,
       role: role,
     },

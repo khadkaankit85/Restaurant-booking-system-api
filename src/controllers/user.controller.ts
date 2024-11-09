@@ -1,4 +1,3 @@
-//logic to create, update and delete user:)
 import {
   createuser,
   deleteUser,
@@ -22,6 +21,37 @@ import { Request, Response } from "express";
 import { comparePass, encryptPass } from "../Utils/EncryptPw";
 import { Restaurant } from "@prisma/client";
 import { restaurant } from "../types/restaurant";
+
+/**
+ * Controller to handle user authentication with password
+ * @param req - Request object with username and password properties.
+ * @returns Promise resolving to a response with a 401 status code if the user
+ *          doesn't exist, a 401 status code if the password is invalid or a
+ *          200 status code if the authentication is successful.
+ */
+export const authUserWithPassword = async (
+  username: string,
+  password: string
+) => {
+  try {
+    const encryptedPassword = password;
+
+    const user = await finduserWithUsername(username);
+    // *! hash the password before comparing :)
+
+    if (!user) {
+      throw new Error("user not found");
+    } else {
+      const passwordMatch = await comparePass(encryptedPassword, user.password);
+      if (passwordMatch) {
+        return user;
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("user auth error " + error);
+  }
+};
 
 /**
  * Controller to handle user creation.
@@ -56,39 +86,6 @@ export const createuserController = async (
   }
 };
 
-/**
- * Controller to handle user authentication.
- * @param req - Request object with username and password properties.
- * @returns Promise resolving to a response with a 401 status code if the user
- *          doesn't exist, a 401 status code if the password is invalid or a
- *          200 status code if the authentication is successful.
- */
-export const userAuthController = async (
-  username: string,
-  password: string
-) => {
-  try {
-    const encryptedPassword = password;
-
-    const user = await finduserWithUsername(username);
-    //#TODO: hash the password before comparing :)
-
-    if (!user) {
-      throw new Error("user not found");
-    } else {
-      const passwordMatch = await comparePass(encryptedPassword, user.password);
-      if (passwordMatch) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  } catch (error) {
-    console.error(error);
-    throw new Error("user auth error " + error);
-  }
-};
-
 export const updateuserController = async (
   req: Request & CreateUserRequest,
   res: Response
@@ -102,7 +99,7 @@ export const changePasswordController = async (
     req.body as PasswordChangeRequest;
 
   //  auth the user
-  const authentication = await userAuthController(username, oldpassword);
+  const authentication = await authUserWithPassword(username, oldpassword);
   if (authentication) {
     const newHashedPassword = await encryptPass(newpassword);
     await updatePassword(username, newHashedPassword);

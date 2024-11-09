@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   createuserController,
-  userAuthController,
   updateuserController,
   changePasswordController,
   changeUsernameController,
@@ -62,6 +61,6 @@ router.delete(
   deleteUserController
 );
 
-// router.post("/login", loginDataValidationMiddleware, userAuthController);
+router.post("/login", loginDataValidationMiddleware);
 
 export default router;
