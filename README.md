@@ -1,4 +1,4 @@
-> After cloning the repo and installing the dependencies, you can run the project by following the steps below:
+After cloning the repo and installing the dependencies, you can run the project by following the steps below:
 
 # Restaurant API Setup Guide
 
@@ -8,18 +8,28 @@ Follow these steps to set up and run the Restaurant API:
    Ensure that your MySQL server is running.
 
 2. **Create a `.env` File**
-   Create a `.env` file in the root directory of your project and add the following line, replacing `<NAME OF YOUR DB>` with the name of your database:
+
+   Create a `.env` file in the root directory of your project and add the following lines, replacing `<YOUR_DB_NAME>` with the name of your database, and `<YOUR_REFRESH_TOKEN_SECRET>` and `<YOUR_ACCESS_TOKEN_SECRET>` with your generated secrets:
 
    ```bash
-   DATABASE_URL="mysql://root:@localhost:3306/<NAME OF YOUR DB>"
+   DATABASE_URL="mysql://root:@localhost:3306/<YOUR_DB_NAME>"
+   NODE_ENV=development
+   JWT_REFRESH_TOKEN_SECRET=<YOUR_REFRESH_TOKEN_SECRET>
+   JWT_ACCESS_TOKEN_SECRET=<YOUR_ACCESS_TOKEN_SECRET>
+   ```
+
+   To generate secret keys, you can use the following command twice to generate two different keys:
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
    ```
 
 3. **Run the Migrations**
    Run the following command to create the tables in your database:
 
-   ```bash
-   npx prisma migrate dev
-   ```
+```bash
+npx prisma migrate dev
+```
 
 4. **Run the Application**
    Start your Node.js application using your preferred method (e.g., `npm start`).
@@ -35,39 +45,4 @@ User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> se
 
 ## API Endpoints
 
-### User Routes:
-
-- **GET /restaurant-data**  
-   Description: Gets restaurant data
-
-- **PUT /update-data**  
-   Parameters: `username`, `password`, `email`, `phone`  
-   Description: Update user data
-
-- **PUT /change-password**  
-   Parameters: `username`, `oldpassword`, `newpassword`  
-   Description: Change password
-
-- **PUT /change-username**  
-   Parameters: `oldUsername`, `newUsername`  
-   Description: Change username
-
-- **PUT /update-role**  
-   Parameters: `username`, `role`  
-   Description: Update role (only admin can update role)
-
-- **PUT /update-restaurant**  
-   Parameters: `contactNumber`, `email` ,`restaurantName`  
-   Description: Update role (only admin can update role)
-
-- **DELETE /remove-user**  
-   Parameters: `username`, `password`  
-   Description: Delete account
-
-- **POST /login**  
-   Parameters: `username`, `password`  
-   Description: Login
-
-- **POST /signup**  
-   Parameters: `username`, `password`, `email`, `phone` (optional)  
-   Description: Signup
+to create a reservation:
