@@ -50,14 +50,14 @@ router.put(
 
 router.put(
   "/upate-role",
-  verifyJWT(),
+  verifyJWT("admin"),
   updateRoleValidationMiddleware,
   updateUserroleController
 );
 
 router.put(
   "/update-restaurant",
-  verifyJWT(),
+  verifyJWT("admin"),
   restaurantUpdateFormValidationMiddleware,
   updateRestaurantDetailController
 );

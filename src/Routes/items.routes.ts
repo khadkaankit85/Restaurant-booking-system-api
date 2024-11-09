@@ -36,4 +36,5 @@ const itemRoutes = (app: Express) => {
     updateItemController
   );
 };
+
 export default itemRoutes;
