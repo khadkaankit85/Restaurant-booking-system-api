@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import userRouter from "./Routes/user.routes";
 import tableRouter from "./Routes/table.routes";
 import reservationRouter from "./Routes/reservation.routes";
@@ -12,6 +13,7 @@ app.use(
     extended: true,
   })
 );
+app.use(cookieParser());
 
 // endpoint for /user
 app.use("/user", userRouter);
