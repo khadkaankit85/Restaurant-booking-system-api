@@ -1,4 +1,4 @@
-import { Express } from "express";
+import { Express, RequestHandler } from "express";
 import { Router } from "express";
 const router = Router();
 import {
@@ -12,11 +12,28 @@ import {
   getItemByIdValidationMiddleware,
   updateItemValidationMiddleware,
 } from "../middlewares/item.middleware";
+import { verifyJWT } from "../middlewares/auth.middleware";
+
 const itemRoutes = (app: Express) => {
   app.use("/items", router);
-  router.get("/", getItemsController);
-  router.get("/:id", getItemByIdValidationMiddleware, getItemByIdController);
-  router.post("/", createItemValidationMiddleware, createItemController);
-  router.put("/:id", updateItemValidationMiddleware, updateItemController);
+  router.get("/", verifyJWT(), getItemsController);
+  router.get(
+    "/:id",
+    verifyJWT(),
+    getItemByIdValidationMiddleware,
+    getItemByIdController
+  );
+  router.post(
+    "/",
+    verifyJWT(),
+    createItemValidationMiddleware,
+    createItemController
+  );
+  router.put(
+    "/:id",
+    verifyJWT(),
+    updateItemValidationMiddleware,
+    updateItemController
+  );
 };
 export default itemRoutes;

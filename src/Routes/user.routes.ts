@@ -19,46 +19,53 @@ import {
   restaurantUpdateFormValidationMiddleware,
 } from "../middlewares/userdata.validation";
 import { login, logout, refresh } from "../controllers/authcontroller";
+import { verifyJWT } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/restaurant-data", getRestaurantDataController);
+router.get("/restaurant-data", verifyJWT(), getRestaurantDataController);
 
 router.post("/signup", signUpDataValidationMiddleware, createuserController);
 
 router.put(
   "/update-data",
+  verifyJWT(),
   updateDataValidationMiddleware,
   updateuserController
 );
 
 router.put(
   "/change-password",
+  verifyJWT(),
   changePassValidationMiddleware,
   changePasswordController
 );
 
 router.put(
   "/change-username",
+  verifyJWT(),
   changeUsernameValidationMiddleware,
   changeUsernameController
 );
 
 router.put(
   "/upate-role",
+  verifyJWT(),
   updateRoleValidationMiddleware,
   updateUserroleController
 );
 
 router.put(
   "/update-restaurant",
+  verifyJWT(),
   restaurantUpdateFormValidationMiddleware,
   updateRestaurantDetailController
 );
 
 router.delete(
   "/remove-user",
-  loginDataValidationMiddleware, //this route takes the same form data as login
+  verifyJWT(),
+  loginDataValidationMiddleware,
   deleteUserController
 );
 

@@ -48,8 +48,8 @@ A restaurant management API built using Prisma and MySQL for a single restaurant
 
 - [ ] **Authentication and Authorization**
 
-  - [ ] Implement authentication (JWT).
-  - [ ] Secure endpoints based on user roles.
+  - [x] Implement authentication (JWT).
+  - [x] Secure endpoints based on user roles.
 
 - [ ] **Testing**
 
