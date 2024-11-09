@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 import { getAllTables, getTableStatus } from "../services/table.service";
-import { table } from "console";
+import { verifyJWT } from "../middlewares/auth.middleware";
 const router = Router();
 
-router.get("/getTables", (req: Request, res: Response) => {
+router.get("/getTables", verifyJWT(), (req: Request, res: Response) => {
   getAllTables()
     .then((tables) => {
       res.json(tables);
@@ -14,7 +14,7 @@ router.get("/getTables", (req: Request, res: Response) => {
     });
 });
 
-router.get("/tablestatus?tableID", (req: Request, res: Response) => {
+router.get("/tablestatus", verifyJWT(), (req: Request, res: Response) => {
   const tableID: string = req.query.tableID as unknown as string;
   if (tableID === undefined) {
     res.status(400).json({ message: "Table ID not provided" });
@@ -29,8 +29,9 @@ router.get("/tablestatus?tableID", (req: Request, res: Response) => {
     });
 });
 
-router.post("/bookTable", (req: Request, res: Response) => {
+router.post("/bookTable", verifyJWT(), (req: Request, res: Response) => {
   const tableID: String = req.body.tableID;
+  // Add logic for booking the table if needed
 });
 
 export default router;
