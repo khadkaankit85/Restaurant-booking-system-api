@@ -61,7 +61,10 @@ const login = asyncHandler(async (req: Request, res: Response) => {
 const refresh = (req: Request, res: Response) => {
   const cookies = req.cookies;
 
-  if (!cookies?.jwt) return res.status(401).json({ message: "unauthorized" });
+  if (!cookies?.jwt) {
+    res.status(401).json({ message: "unauthorized" });
+    return;
+  }
 
   const refreshToken = cookies.jwt;
 
@@ -69,12 +72,17 @@ const refresh = (req: Request, res: Response) => {
     refreshToken,
     process.env.JWT_ACCESS_TOKEN_SECRET as string,
     async (err: Error | null, decoded: JwtPayload | string | undefined) => {
-      if (err) return res.status(403).json({ message: "forbidden" });
+      if (err) {
+        res.status(403).json({ message: "forbidden" });
+        return;
+      }
 
       if (decoded && typeof decoded == "object") {
         const foundUser = await finduserWithUsername(decoded.UserInfo.username);
-        if (!foundUser)
-          return res.status(401).json({ message: "unauthorizsed" });
+        if (!foundUser) {
+          res.status(401).json({ message: "unauthorizsed" });
+          return;
+        }
 
         const accessToken = jwt.sign(
           {
@@ -89,7 +97,8 @@ const refresh = (req: Request, res: Response) => {
 
         res.json({ accessToken });
       } else {
-        return res.status(403).json({ message: "Invalid refresh token" });
+        res.status(403).json({ message: "Invalid refresh token" });
+        return;
       }
     }
   );

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { RequestHandler, Router } from "express";
 import {
   createuserController,
   updateuserController,
@@ -18,6 +18,7 @@ import {
   updateRoleValidationMiddleware,
   restaurantUpdateFormValidationMiddleware,
 } from "../middlewares/userdata.validation";
+import { login, logout, refresh } from "../controllers/authcontroller";
 
 const router = Router();
 
@@ -61,6 +62,8 @@ router.delete(
   deleteUserController
 );
 
-router.post("/login", loginDataValidationMiddleware);
+router.post("/login", loginDataValidationMiddleware, login);
+router.get("/refresh", refresh);
+router.post("/logout", logout as RequestHandler);
 
 export default router;
