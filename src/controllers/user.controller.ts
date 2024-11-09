@@ -174,7 +174,11 @@ export const getRestaurantDataController = async (
 ) => {
   try {
     const restaurant = await getRestaurantDetail();
-    res.json(restaurant);
+    res.json({
+      data: {
+        restaurant,
+      },
+    });
   } catch {
     console.log("restaurant update error");
     res.status(400).send("internal server error occurred");

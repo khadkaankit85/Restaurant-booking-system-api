@@ -3,6 +3,7 @@ import {
   createReservationValidationMiddleware,
   deleteReservationValidationMiddleware,
   getReservationsByUserIDValidationMiddleware,
+  updateReservationValidationMiddleware,
 } from "../middlewares/reservation.middleware";
 import {
   createReservationController,
@@ -36,7 +37,7 @@ router.get(
 router.post(
   "/updateReservation",
   verifyJWT(),
-  updateDataValidationMiddleware,
+  updateReservationValidationMiddleware,
   updateReservationController
 );
 

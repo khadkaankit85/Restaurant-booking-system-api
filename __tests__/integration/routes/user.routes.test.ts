@@ -1,19 +1,21 @@
 import request from "supertest";
 import app from "../../../src/app";
 import signToken from "../../../src/Utils/jwt";
+const userpayload = { UserInfo: { username: "khadkaankit", role: "user" } };
+const adminpayload = { UserInfo: { username: "adminUserId", role: "admin" } };
 
 describe("User Routes", () => {
   let token: string;
 
   beforeAll(() => {
-    token = signToken({ id: "testUserId", role: "user" });
+    token = signToken(userpayload);
   });
 
   describe("GET /restaurant-data", () => {
     it("should return restaurant data for authenticated user", async () => {
       const response = await request(app)
-        .get("/restaurant-data")
-        .set("Authorization", `Bearer ${token}`);
+        .get("/user/restaurant-data")
+        .set("authorization", `Bearer ${token}`);
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty("data");
     });
@@ -95,7 +97,7 @@ describe("User Routes", () => {
 
   describe("PUT /upate-role", () => {
     it("should update user role for admin user", async () => {
-      const adminToken = signToken({ id: "adminUserId", role: "admin" });
+      const adminToken = signToken(adminpayload);
       const response = await request(app)
         .put("/upate-role")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -114,7 +116,7 @@ describe("User Routes", () => {
 
   describe("PUT /update-restaurant", () => {
     it("should update restaurant details for admin user", async () => {
-      const adminToken = signToken({ id: "adminUserId", role: "admin" });
+      const adminToken = signToken(adminpayload);
       const response = await request(app)
         .put("/update-restaurant")
         .set("Authorization", `Bearer ${adminToken}`)

@@ -73,4 +73,6 @@ router.post("/login", loginDataValidationMiddleware, login);
 router.get("/refresh", refresh);
 router.post("/logout", logout as RequestHandler);
 
+router.get("finduser", verifyJWT());
+
 export default router;

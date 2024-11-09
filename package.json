@@ -5,7 +5,7 @@
   "main": "server.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest --detectOpenHandles --forceExit --watch  --coverage ../__tests__/integration/user.routes.test.ts",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js"
   },

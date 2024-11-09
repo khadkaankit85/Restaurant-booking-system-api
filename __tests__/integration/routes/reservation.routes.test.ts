@@ -5,14 +5,23 @@ import { config } from "dotenv";
 
 config();
 
-const token = sign({ id: "testUserId" }, process.env.JWT_SECRET!, {
-  expiresIn: "1h",
-});
+const token = sign(
+  {
+    UserInfo: {
+      username: "khadaankit",
+      role: "user",
+    },
+  },
+  process.env.JWT_ACCESS_TOKEN_SECRET as string,
+  {
+    expiresIn: "1h",
+  }
+);
 
 describe("Reservation Routes", () => {
   it("should get all reservations", async () => {
     const response = await request(app)
-      .get("/getAllReservations")
+      .get("/reservation/getAllReservations")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -21,7 +30,7 @@ describe("Reservation Routes", () => {
 
   it("should get reservation by id", async () => {
     const response = await request(app)
-      .get("/getReservationById/1")
+      .get("/reservation/getReservationById/1")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -30,10 +39,23 @@ describe("Reservation Routes", () => {
 
   it("should create a reservation", async () => {
     const response = await request(app)
-      .get("/createReservation")
+      .get("/reservation/createReservation")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        // Add necessary payload for creating a reservation
+        reservation: {
+          reservedById: 123,
+          tableId: 45,
+          reservedItems: [
+            {
+              itemId: 1,
+              quantity: 2,
+            },
+            {
+              itemId: 2,
+              quantity: 1,
+            },
+          ],
+        },
       });
 
     expect(response.status).toBe(200);
@@ -42,22 +64,35 @@ describe("Reservation Routes", () => {
 
   it("should update a reservation", async () => {
     const response = await request(app)
-      .post("/updateReservation")
+      .post("/reservation/updateReservation")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        // Add necessary payload for updating a reservation
+        reservation: {
+          reservedById: 123,
+          tableId: 45,
+          reservedItems: [
+            {
+              itemId: 1,
+              quantity: 3,
+            },
+            {
+              itemId: 2,
+              quantity: 1,
+            },
+          ],
+        },
       });
 
     expect(response.status).toBe(200);
-    // Add more assertions based on the actual response
+    console.log(response.body);
   });
 
   it("should delete a reservation", async () => {
     const response = await request(app)
-      .delete("/deleteReservation")
+      .delete("/reservation/deleteReservation")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        // Add necessary payload for deleting a reservation
+        id: 123,
       });
 
     expect(response.status).toBe(200);
@@ -66,7 +101,7 @@ describe("Reservation Routes", () => {
 
   it("should get reservations of a user", async () => {
     const response = await request(app)
-      .get("/getReservationOfUser")
+      .get("/reservation/getReservationOfUser")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
