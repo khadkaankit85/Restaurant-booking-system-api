@@ -4,48 +4,54 @@ import {
   deleteReservationValidationMiddleware,
   getReservationsByUserIDValidationMiddleware,
 } from "../middlewares/reservation.middleware";
-import { getReservationById } from "../services/reservation.services";
-import { create } from "domain";
 import {
   createReservationController,
   deleteReservationController,
   getReservationByIdController,
   updateReservationController,
 } from "../controllers/reservation.controller";
+import { verifyJWT } from "../middlewares/auth.middleware";
 import { updateDataValidationMiddleware } from "../middlewares/userdata.validation";
 
 const router = Router();
 
-router.get("/getAllReservations", (req, res) => {
+router.get("/getAllReservations", verifyJWT(), (req, res) => {
   res.send("Get all reservations");
 });
 
 router.get(
   "/getReservationById/:id",
+  verifyJWT(),
   deleteReservationValidationMiddleware,
   getReservationByIdController
 );
 
 router.get(
   "/createReservation",
+  verifyJWT(),
   createReservationValidationMiddleware,
   createReservationController
 );
 
 router.post(
   "/updateReservation",
+  verifyJWT(),
   updateDataValidationMiddleware,
   updateReservationController
 );
 
 router.delete(
   "/deleteReservation",
+  verifyJWT(),
   deleteReservationValidationMiddleware,
   deleteReservationController
 );
+
 router.get(
-  "getReservationOfUser?userID",
+  "/getReservationOfUser",
+  verifyJWT(),
   getReservationsByUserIDValidationMiddleware,
   getReservationByIdController
 );
+
 export default router;
