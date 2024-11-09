@@ -23,7 +23,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     throw new Error("JWT secrets are missing in environment variables.");
   }
 
-  const accesToken = jwt.sign(
+  const accessToken = jwt.sign(
     {
       UserInfo: {
         username: matchedUser.username,
@@ -40,8 +40,22 @@ const login = asyncHandler(async (req: Request, res: Response) => {
         username: matchedUser.username,
       },
     },
-    process.env.JWT_REFRESH_TOKEN_SECRET
+    process.env.JWT_REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: "7d",
+    }
   );
+
+  //   creating a secure cookie with refresh token
+  res.cookie("jwt", refreshToken, {
+    httpOnly: true, //Flags the cookie to be accessible only by the web server not client
+    secure: true, //https only
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  //sending the access token
+  res.json({ accessToken });
 });
 
 const refresh = (req: Request, res: Response) => {};
