@@ -43,7 +43,7 @@ describe("User Routes", () => {
   describe("PUT /update-data", () => {
     it("should update user data for authenticated user", async () => {
       const response = await request(app)
-        .put("/update-data")
+        .put("/user/update-data")
         .set("Authorization", `Bearer ${token}`)
         .send({ username: "updatedUser" });
       expect(response.status).toBe(200);
