@@ -31,42 +31,42 @@ router.put(
   "/update-data",
   verifyJWT(),
   updateDataValidationMiddleware,
-  updateuserController
+  updateuserController,
 );
 
 router.put(
   "/change-password",
   verifyJWT(),
   changePassValidationMiddleware,
-  changePasswordController
+  changePasswordController,
 );
 
 router.put(
   "/change-username",
   verifyJWT(),
   changeUsernameValidationMiddleware,
-  changeUsernameController
+  changeUsernameController,
 );
 
 router.put(
   "/upate-role",
   verifyJWT("admin"),
   updateRoleValidationMiddleware,
-  updateUserroleController
+  updateUserroleController,
 );
 
 router.put(
   "/update-restaurant",
   verifyJWT("admin"),
   restaurantUpdateFormValidationMiddleware,
-  updateRestaurantDetailController
+  updateRestaurantDetailController,
 );
 
 router.delete(
   "/remove-user",
   verifyJWT(),
   loginDataValidationMiddleware,
-  deleteUserController
+  deleteUserController,
 );
 
 router.post("/login", loginDataValidationMiddleware, login);

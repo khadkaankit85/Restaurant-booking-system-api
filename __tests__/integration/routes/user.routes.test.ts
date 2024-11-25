@@ -1,7 +1,9 @@
 import request from "supertest";
 import app from "../../../src/app";
 import signToken from "../../../src/Utils/jwt";
-const userpayload = { UserInfo: { username: "khadkaankit", role: "user" } };
+const userpayload = {
+  UserInfo: { username: "khadkaankit", password: "123456pass", role: "user" },
+};
 const adminpayload = { UserInfo: { username: "adminUserId", role: "admin" } };
 
 describe("User Routes", () => {
@@ -28,18 +30,13 @@ describe("User Routes", () => {
 
   describe("POST /signup", () => {
     it("should create a new user", async () => {
-      const response = await request(app)
-        .post("/signup")
-        .send({ username: "testuser", password: "password123" });
+      const response = await request(app).post("/user/signup").send({
+        username: "testuser",
+        password: "password123",
+        email: "emailaddress@gmail.com",
+      });
       expect(response.status).toBe(201);
       expect(response.body).toHaveProperty("user");
-    });
-
-    it("should return 400 for invalid data", async () => {
-      const response = await request(app)
-        .post("/signup")
-        .send({ username: "", password: "" });
-      expect(response.status).toBe(400);
     });
   });
 

@@ -31,7 +31,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
       },
     },
     process.env.JWT_ACCESS_TOKEN_SECRET,
-    { expiresIn: "10s", algorithm: "HS256" }
+    { expiresIn: "10s", algorithm: "HS256" },
   );
 
   const refreshToken = jwt.sign(
@@ -43,7 +43,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     process.env.JWT_REFRESH_TOKEN_SECRET,
     {
       expiresIn: "7d",
-    }
+    },
   );
 
   //   creating a secure cookie with refresh token
@@ -92,7 +92,7 @@ const refresh = (req: Request, res: Response) => {
             },
           },
           process.env.JWT_ACCESS_TOKEN_SECRET as string,
-          { expiresIn: "10s" }
+          { expiresIn: "10s" },
         );
 
         res.json({ accessToken });
@@ -100,7 +100,7 @@ const refresh = (req: Request, res: Response) => {
         res.status(403).json({ message: "Invalid refresh token" });
         return;
       }
-    }
+    },
   );
 };
 
