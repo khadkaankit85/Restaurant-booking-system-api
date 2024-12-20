@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npx jest --detectOpenHandles --forceExit --watch  --coverage ../__tests__/integration/user.routes.test.ts",
-    "dev": "tsx watch src/server.ts",
+    "dev": " cd frontend && npm run build && cd .. && tsx watch src/server.ts ",
     "start": "node dist/server.js"
   },
   "keywords": [],

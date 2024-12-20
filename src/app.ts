@@ -4,7 +4,10 @@ import userRouter from "./Routes/user.routes";
 import tableRouter from "./Routes/table.routes";
 import reservationRouter from "./Routes/reservation.routes";
 import itemRoutes from "./Routes/items.routes";
-
+import path from "path";
+import { fileURLToPath } from "url";
+//@ts-ignore
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 //middleware to parse data
@@ -19,6 +22,12 @@ app.use(cookieParser());
  * POST  /user/signup
  *
  */
+app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend/dist", "index.html"));
+});
+
 // endpoint for /user
 app.use("/user", userRouter);
 app.use("/items", itemRoutes);
