@@ -24,35 +24,35 @@ router.get(
   "/getReservationById/:id",
   verifyJWT(),
   deleteReservationValidationMiddleware,
-  getReservationByIdController
+  getReservationByIdController,
 );
 
 router.get(
   "/createReservation",
   verifyJWT(),
   createReservationValidationMiddleware,
-  createReservationController
+  createReservationController,
 );
 
 router.post(
   "/updateReservation",
   verifyJWT(),
   updateReservationValidationMiddleware,
-  updateReservationController
+  updateReservationController,
 );
 
 router.delete(
   "/deleteReservation",
   verifyJWT(),
   deleteReservationValidationMiddleware,
-  deleteReservationController
+  deleteReservationController,
 );
 
 router.get(
   "/getReservationOfUser",
   verifyJWT(),
   getReservationsByUserIDValidationMiddleware,
-  getReservationByIdController
+  getReservationByIdController,
 );
 
 export default router;
