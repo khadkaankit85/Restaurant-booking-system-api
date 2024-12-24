@@ -6,7 +6,7 @@ import jwt, { JwtPayload, VerifyOptions } from "jsonwebtoken";
 
 const login = asyncHandler(async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  if (!username || password) {
+  if (!username || !password) {
     res.status(400).json({ message: "all fields are required" });
     return;
   }
@@ -47,7 +47,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   );
 
   //   creating a secure cookie with refresh token
-  res.cookie("jwt", refreshToken, {
+  res.cookie("restJWT", refreshToken, {
     httpOnly: true, //Flags the cookie to be accessible only by the web server not client
     secure: true, //https only
     sameSite: "none",
