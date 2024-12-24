@@ -45,4 +45,29 @@ User --> app.ts --> router.ts --> middleware (optional) --> controller.ts --> se
 
 ## API Endpoints
 
-to create a reservation:
+1. To create a new user:
+   POST request on user/signup
+
+Request Body:
+username: min length is 5 and max 15
+password: min length of 4
+email:should be a valid email
+phone: optional with length ten
+
+Response:
+201 for user created successfully
+209 for duplicate username
+500 for internal server error
+422 for invalid user data
+
+2. To Login a user:
+   POST request on user/login
+
+Request Body:
+username: min length is 5 and max 15
+password: min length of 4
+
+Response:
+400 for if not all the fields are filled
+401 for unauthorised
+OK for login with Access Token in response and refresh token in cookies
