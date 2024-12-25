@@ -6,7 +6,7 @@ import jwt, { JwtPayload, VerifyOptions } from "jsonwebtoken";
 
 const login = asyncHandler(async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  if (!username || password) {
+  if (!username || !password) {
     res.status(400).json({ message: "all fields are required" });
     return;
   }
