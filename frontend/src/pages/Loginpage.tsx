@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -26,12 +27,14 @@ export const LoginPage: React.FC = () => {
     resolver: yupResolver(schema),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: LoginFormData) => {
     try {
       //@ts-ignore
       const response = await axios.post("user/login", data);
       if (response.status === 200) {
-        alert("Login successful!");
+        navigate("/home");
       } else if (response.status === 401) {
         alert("Incorrect credentials");
       } else {

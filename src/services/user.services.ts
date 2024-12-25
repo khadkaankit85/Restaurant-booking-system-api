@@ -2,7 +2,7 @@ import { UserRole } from "@prisma/client";
 import { prisma } from "../prisma/prismaClient";
 import { user } from "../types/user";
 import { restaurant } from "../types/restaurant";
-
+import { Request, Response } from "express";
 export const createuser = async ({
   username,
   password,
@@ -29,7 +29,7 @@ export const createuser = async ({
  */
 export const finduserWithPassword = async (
   username: string,
-  password: string
+  password: string,
 ) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -84,7 +84,7 @@ export const updateUserDetail = async ({ phone, email, id }: user) => {
  */
 export const updateUsername = async (
   oldusername: string,
-  newUsername: string
+  newUsername: string,
 ) => {
   const updateUser = await prisma.user.update({
     where: {
@@ -107,7 +107,7 @@ export const updateUsername = async (
  */
 export const updatePassword = async (
   username: string,
-  newHashedPassword: string
+  newHashedPassword: string,
 ) => {
   const updatePassword = await prisma.user.update({
     where: {
@@ -165,5 +165,17 @@ export const getRestaurantDetail = async (id = 1) => {
     return resturant;
   } catch {
     console.log("error in fniding restaurant data");
+  }
+};
+export const userinfo = async (req: Request, res: Response) => {
+  try {
+    const foundUser = await finduserWithUsername(req.body.username);
+    res.status(200).json({
+      data: {
+        foundUser,
+      },
+    });
+  } catch {
+    res.status(400).json({ message: "internal server error" });
   }
 };

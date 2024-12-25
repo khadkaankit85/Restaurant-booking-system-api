@@ -20,6 +20,7 @@ import {
 } from "../middlewares/userdata.validation";
 import { login, logout, refresh } from "../controllers/authcontroller";
 import { verifyJWT } from "../middlewares/auth.middleware";
+import { userinfo } from "../services/user.services";
 
 const router = Router();
 
@@ -72,7 +73,7 @@ router.delete(
 router.post("/login", loginDataValidationMiddleware, login);
 router.get("/refresh", refresh);
 router.post("/logout", logout as RequestHandler);
-
+router.get("/userinfo", userinfo);
 router.get("finduser", verifyJWT());
 
 export default router;

@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "npx jest --detectOpenHandles --forceExit --watch  --coverage ../__tests__/integration/user.routes.test.ts",
-    "dev": " cd frontend && npm run build && cd .. && tsx watch src/server.ts ",
-    "start": "node dist/server.js"
+    "rebuild": "cd frontend && npm run previewbuild && cd ..",
+    "watch:frontend": "chokidar 'frontend/src/**/*' -c 'npm run rebuild'",
+    "dev": "concurrently \"npm run watch:frontend\" \"tsx watch src/server.ts\""
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.7.4",
     "@types/supertest": "^6.0.2",
+    "concurrently": "^9.1.0",
     "jest": "^29.7.0",
     "prisma": "^5.20.0",
     "supertest": "^7.0.0",
