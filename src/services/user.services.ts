@@ -169,7 +169,9 @@ export const getRestaurantDetail = async (id = 1) => {
 };
 export const userinfo = async (req: Request, res: Response) => {
   try {
-    const foundUser = await finduserWithUsername(req.body.username);
+    //@ts-ignore
+    const foundUser = await finduserWithUsername(req.query.username);
+    console.log(foundUser);
     res.status(200).json({
       data: {
         foundUser,

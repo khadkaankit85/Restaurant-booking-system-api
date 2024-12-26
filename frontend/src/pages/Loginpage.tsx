@@ -1,10 +1,14 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {
+  UserInfoContext,
+  UserInformationInterface as UserInformation,
+} from "../states/Contexts.tsx";
+import axios from "axios";
 
 const schema = yup
   .object({
@@ -17,6 +21,9 @@ interface LoginFormData {
   username: string;
   password: string;
 }
+interface LoginApiResponse {
+  userinfo: UserInformation;
+}
 
 export const LoginPage: React.FC = () => {
   const {
@@ -28,12 +35,18 @@ export const LoginPage: React.FC = () => {
   });
 
   const navigate = useNavigate();
+  const userInformationConsumed = useContext(UserInfoContext);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      //@ts-ignore
-      const response = await axios.post("user/login", data);
+      const response = await axios.post<LoginApiResponse>("user/login", data);
       if (response.status === 200) {
+        const fetchedInfo = response.data.userinfo as UserInformation;
+        if (userInformationConsumed === undefined) {
+          console.error("user information context is undefined");
+          return;
+        }
+        userInformationConsumed.setUserInformation(fetchedInfo);
         navigate("/home");
       } else if (response.status === 401) {
         alert("Incorrect credentials");

@@ -55,7 +55,15 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   });
 
   //sending the access token
-  res.json({ accessToken, redirect: "home" });
+  res.json({
+    accessToken,
+    redirect: "home",
+    userinfo: {
+      username: matchedUser.username,
+      role: matchedUser.role,
+      email: matchedUser.email,
+    },
+  });
 });
 
 const refresh = (req: Request, res: Response) => {

@@ -70,4 +70,23 @@ password: min length of 4
 Response:
 400 for if not all the fields are filled
 401 for unauthorised
-OK for login with Access Token in response (restJWT) and also the redirect url(response.redirect) and refresh token in cookies
+For successful login this is the response:
+
+```
+res.cookie("restJWT", refreshToken, {
+    httpOnly: true, //Flags the cookie to be accessible only by the web server not client
+    secure: true, //https only
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  res.json({
+    accessToken,
+    redirect: "home",
+    userinfo: {
+      username: matchedUser.username,
+      role: matchedUser.role,
+      email: matchedUser.email,
+    },
+  });
+```
