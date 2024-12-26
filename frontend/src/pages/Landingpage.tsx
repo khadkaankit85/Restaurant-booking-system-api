@@ -1,7 +1,25 @@
-import React, { CSSProperties } from "react";
-import { Link } from "react-router-dom";
+import React, { CSSProperties, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchRole } from "../utils/Tools";
 
 export const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function roleChecker() {
+      try {
+        const role = await fetchRole();
+        if (role >= 1) navigate("/home");
+        else {
+          return;
+        }
+      } catch (e) {
+        console.log(e);
+        console.log("not logged in");
+      }
+    }
+    roleChecker();
+  });
+
   return (
     <div style={styles.container}>
       <div style={styles.card as unknown as CSSProperties}>

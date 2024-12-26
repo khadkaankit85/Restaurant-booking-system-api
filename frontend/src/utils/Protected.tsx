@@ -11,8 +11,7 @@ interface ProtectedProp {
   children: React.ReactNode;
   role: "user" | "admin";
 }
-
-//@ts-ignore
+/*
 interface UserDataCheckAPIResponse {
   foundUser: {
     id: number;
@@ -22,7 +21,7 @@ interface UserDataCheckAPIResponse {
     role: "user" | "admin";
   };
 }
-
+*/
 export const Protected = ({ children, role }: ProtectedProp) => {
   //roles are 0 for not logged in , 1 for user and 2 for the admin
   const userInfoContextConsumed = useContext(UserInfoContext);
@@ -42,6 +41,7 @@ export const Protected = ({ children, role }: ProtectedProp) => {
         !accessTokenContextConsumed?.accessToken
       ) {
         //if there is not userinfromation, then that possibly means user need to login but we still are gonna check if the user has some token for persistent login
+        ////this code can be refactored by using fetchRole functinos from utils, but i don't wanna waste my precious time here haha
         const res = await axios.post<{
           accessToken: string;
           userinfo: UserInformationInterface;
