@@ -47,10 +47,10 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   );
 
   //   creating a secure cookie with refresh token
-  res.cookie("restJWT", refreshToken, {
+  res.cookie("restJWTRefreshToken", refreshToken, {
     httpOnly: true, //Flags the cookie to be accessible only by the web server not client
     secure: true, //https only
-    sameSite: "none",
+    sameSite: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
@@ -68,17 +68,16 @@ const login = asyncHandler(async (req: Request, res: Response) => {
 
 const refresh = (req: Request, res: Response) => {
   const cookies = req.cookies;
-
-  if (!cookies?.jwt) {
+  const userJWT = cookies?.restJWTRefreshToken;
+  console.log(userJWT, cookies);
+  if (!userJWT) {
     res.status(401).json({ message: "unauthorized" });
     return;
   }
 
-  const refreshToken = cookies.jwt;
-
   jwt.verify(
-    refreshToken,
-    process.env.JWT_ACCESS_TOKEN_SECRET as string,
+    userJWT,
+    process.env.JWT_REFRESH_TOKEN_SECRET!,
     async (err: Error | null, decoded: JwtPayload | string | undefined) => {
       if (err) {
         res.status(403).json({ message: "forbidden" });
@@ -86,7 +85,7 @@ const refresh = (req: Request, res: Response) => {
       }
 
       if (decoded && typeof decoded == "object") {
-        const foundUser = await finduserWithUsername(decoded.UserInfo.username);
+        const foundUser = await finduserWithUsername(decoded.userInfo.username);
         if (!foundUser) {
           res.status(401).json({ message: "unauthorizsed" });
           return;
@@ -102,8 +101,14 @@ const refresh = (req: Request, res: Response) => {
           process.env.JWT_ACCESS_TOKEN_SECRET as string,
           { expiresIn: "10s" },
         );
-
-        res.json({ accessToken });
+        res.status(200).json({
+          accessToken,
+          userinfo: {
+            username: foundUser.username,
+            role: foundUser.role,
+            email: foundUser.email,
+          },
+        });
       } else {
         res.status(403).json({ message: "Invalid refresh token" });
         return;

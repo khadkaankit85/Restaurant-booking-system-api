@@ -3,6 +3,8 @@ import { prisma } from "../prisma/prismaClient";
 import { user } from "../types/user";
 import { restaurant } from "../types/restaurant";
 import { Request, Response } from "express";
+import jwt, { JsonWebTokenError } from "jsonwebtoken";
+import { refresh } from "../controllers/authcontroller";
 export const createuser = async ({
   username,
   password,
@@ -167,17 +169,35 @@ export const getRestaurantDetail = async (id = 1) => {
     console.log("error in fniding restaurant data");
   }
 };
+
 export const userinfo = async (req: Request, res: Response) => {
   try {
-    //@ts-ignore
-    const foundUser = await finduserWithUsername(req.query.username);
-    console.log(foundUser);
+    const username = req.body.username;
+    if (!username) {
+      res.status(400).send("no username found");
+      return;
+    }
+    const foundUser = await finduserWithUsername(username);
+
+    if (foundUser == null) {
+      res.status(400).json({ message: "user not found" });
+      return;
+    }
+
     res.status(200).json({
       data: {
-        foundUser,
+        username: foundUser.username,
+        id: foundUser.id,
+        email: foundUser.email,
+        phone: foundUser.phone,
+        role: foundUser.role,
       },
     });
   } catch {
-    res.status(400).json({ message: "internal server error" });
+    res.status(500).json({ message: "internal server error" });
   }
+};
+
+export const loginwithCookie = async (req: Request, res: Response) => {
+  refresh(req, res);
 };

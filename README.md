@@ -73,7 +73,7 @@ Response:
 For successful login this is the response:
 
 ```
-res.cookie("restJWT", refreshToken, {
+res.cookie("restJWTRefreshToken", refreshToken, {
     httpOnly: true, //Flags the cookie to be accessible only by the web server not client
     secure: true, //https only
     sameSite: "none",
@@ -89,4 +89,21 @@ res.cookie("restJWT", refreshToken, {
       email: matchedUser.email,
     },
   });
+
+Note: access token shall be used with bearer token as headers while refresh token is automatically sent by the browser on every withcredentials=true request
+```
+
+3. To get new access token on browser refresh or session restart with cookie
+   A Post request on user/loginwithcookie, with withcredentials of course, if no restJWTRefreshToken is found in the cookie, user would have to relogin to obtain one otherwise user would get a new access token which shall be used as auth header in future requests.
+
+An OK request to /user/loginwithcookie will return
+
+```
+res.status(200).json({
+          accessToken,
+          userinfo: {
+            username: foundUser.username,
+            role: foundUser.role,
+            email: foundUser.email,
+          },
 ```

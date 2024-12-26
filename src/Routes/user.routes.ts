@@ -20,11 +20,11 @@ import {
 } from "../middlewares/userdata.validation";
 import { login, logout, refresh } from "../controllers/authcontroller";
 import { verifyJWT } from "../middlewares/auth.middleware";
-import { userinfo } from "../services/user.services";
+import { loginwithCookie, userinfo } from "../services/user.services";
 
 const router = Router();
 
-router.get("/restaurant-data", verifyJWT(), getRestaurantDataController);
+router.post("/restaurant-data", verifyJWT(), getRestaurantDataController);
 
 router.post("/signup", signUpDataValidationMiddleware, createuserController);
 
@@ -71,9 +71,9 @@ router.delete(
 );
 
 router.post("/login", loginDataValidationMiddleware, login);
-router.get("/refresh", refresh);
+router.post("/refresh", refresh);
+router.post("/loginwithcookie", loginwithCookie);
 router.post("/logout", logout as RequestHandler);
-router.get("/userinfo", userinfo);
-router.get("finduser", verifyJWT());
-
+router.post("/userinfo", userinfo);
+router.post("/finduser", verifyJWT());
 export default router;
