@@ -31,7 +31,7 @@ import { restaurant } from "../types/restaurant";
  */
 export const authUserWithPassword = async (
   username: string,
-  password: string
+  password: string,
 ) => {
   try {
     const encryptedPassword = password;
@@ -61,7 +61,7 @@ export const authUserWithPassword = async (
  */
 export const createuserController = async (
   req: Request & CreateUserRequest,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const username: string = req.body.username;
@@ -88,12 +88,12 @@ export const createuserController = async (
 
 export const updateuserController = async (
   req: Request & CreateUserRequest,
-  res: Response
+  res: Response,
 ): Promise<void> => {};
 
 export const changePasswordController = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   const { oldpassword, newpassword, username } =
     req.body as PasswordChangeRequest;
@@ -126,7 +126,7 @@ export const changeUsernameController = async (req: Request, res: Response) => {
 
 export const deleteUserController = async (
   req: Request & LoginRequest,
-  res: Response
+  res: Response,
 ) => {
   try {
     const hashedPassword = await encryptPass(req.body.password);
@@ -153,13 +153,13 @@ export const updateUserroleController = async (req: Request, res: Response) => {
 
 export const updateRestaurantDetailController = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
     const newDetail = req.body.newDetail as Restaurant;
     const updatedRestaurant = await updateRestaurantDetail(
       1,
-      newDetail as restaurant
+      newDetail as restaurant,
     );
     res.send("updated resturant detail");
   } catch {
@@ -170,11 +170,11 @@ export const updateRestaurantDetailController = async (
 
 export const getRestaurantDataController = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
     const restaurant = await getRestaurantDetail();
-    res.json({
+    res.status(200).json({
       data: {
         restaurant,
       },

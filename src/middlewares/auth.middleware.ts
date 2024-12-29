@@ -47,7 +47,7 @@ export const verifyJWT = (roles: "user" | "admin" = "user"): RequestHandler => {
               res.status(401).json({ message: "Unauthorized" });
               return;
             }
-          }
+          },
         );
       } catch (error) {
         res.status(500).json({ message: "Internal server error" });
