@@ -1,3 +1,18 @@
-.landingpagediv{
-    @apply mt-3  border-[5rem] mt-2
+/* styles.css */
+.landingpagediv {
+  @apply  m-0 p-0;
+
+}
+
+.logo {
+  @apply w-[80px] h-auto m-2;
+}
+
+.nav {
+  @apply flex items-center justify-between text-black; 
+}
+
+.li {
+  @apply list-none text-black hover:text-cyan-600;
+
 }

@@ -2,6 +2,7 @@ import React, {  useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchRole } from "../utils/Tools";
 import  "./mycss.css"
+import Navigation from "./Navigation";
 export const LandingPage: React.FC = () => {
 
   const navigate = useNavigate();
@@ -23,7 +24,10 @@ export const LandingPage: React.FC = () => {
   });
 
   return (
-  <div className="landingpagediv">This is the landing page </div>
+    <>
+      <Navigation></Navigation>
+
+    </>
   );
 };
 
