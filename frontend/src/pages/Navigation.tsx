@@ -11,10 +11,12 @@ const Navigation = () => {
           className="logo"
         />
         <ul className="flex space-x-4 m-3">
-          <li className="li">Reservation</li>
           <li className="li">Menue</li>
           <li className="li">Login</li>
           <li className="li">Online Order</li>
+          <li className="li">Reservation</li>
+
+          
         </ul>
       </nav>
       </div>

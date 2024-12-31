@@ -43,6 +43,8 @@ export const LandingPage: React.FC = () => {
   return (
     <>
       <Navigation />
+      <h1 className="text-cyan-800 font-bold text-3xl text-center tracking-widen hover ">
+  Enjoy a meal with HamroResturant</h1>
       <Slider autoplay={1000}>
         {slides.map((slide, index) => (
           <div key={index} className="slider-content">
@@ -52,6 +54,10 @@ export const LandingPage: React.FC = () => {
           </div>
         ))}
       </Slider>
+      <div className="offerPart">
+        <h1 className="detail"> We Offer Top Notch</h1>
+        <p className="explain">We are a five start rated resturant serving delicious food from past 5  years. YOu can enjoy all the best food in the same place.</p>
+      </div>
     </>
   );
 };
