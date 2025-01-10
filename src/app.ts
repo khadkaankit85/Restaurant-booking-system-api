@@ -31,6 +31,8 @@ app.get("*", (req, res) => {
 // endpoint for /user
 app.use("/user", userRouter);
 
+
+app.use("/items", itemRoutes);
 app.use("/table", tableRouter);
 app.use("/reservation", reservationRouter);
 

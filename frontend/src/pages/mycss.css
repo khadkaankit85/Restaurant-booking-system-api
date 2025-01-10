@@ -1,0 +1,93 @@
+/* styles.css */
+.landingpagediv {
+  @apply m-0 p-0;
+}
+
+.logo {
+  @apply w-[80px] h-auto m-2;
+}
+
+.nav {
+  @apply flex items-center justify-between text-black;
+}
+
+.li {
+  @apply list-none text-cyan-800 hover:text-cyan-600;
+}
+.slider-content {
+  text-align: center;
+}
+
+.slider-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-content h2 {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.slider-content p {
+  font-size: 16px;
+  color: #666;
+}
+.menu-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 2rem 0;
+}
+
+.menu-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 200px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+.menu-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.menu-item h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.menu-item p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+.logo {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  margin-right: 10px;
+}
+.main_container nav {
+  display: flex;
+  align-items: center;
+}
+.main_container li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
