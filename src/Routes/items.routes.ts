@@ -21,19 +21,19 @@ const itemRoutes = (app: Express) => {
     "/:id",
     verifyJWT(),
     getItemByIdValidationMiddleware,
-    getItemByIdController
+    getItemByIdController,
   );
   router.post(
     "/",
     verifyJWT(),
     createItemValidationMiddleware,
-    createItemController
+    createItemController,
   );
   router.put(
     "/:id",
     verifyJWT(),
     updateItemValidationMiddleware,
-    updateItemController
+    updateItemController,
   );
 };
 

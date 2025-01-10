@@ -13,6 +13,7 @@ export const signUpDataValidationMiddleware = [
   check("password")
     .isLength({ min: 4 })
     .withMessage("Min length of password is 4"),
+
   check("email").isEmail().withMessage("Must be a valid email"),
 
   check("phone")
