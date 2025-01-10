@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { fetchRole } from "../utils/Tools";
 
 export const LandingPage: React.FC = () => {
+  const [isloading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     async function roleChecker() {
@@ -10,15 +11,18 @@ export const LandingPage: React.FC = () => {
         const role = await fetchRole();
         if (role >= 1) navigate("/home");
         else {
+          setIsLoading(false);
           return;
         }
       } catch (e) {
         console.log(e);
-        console.log("not logged in");
+        setIsLoading(false);
       }
     }
     roleChecker();
   });
+
+  if (isloading) return <div></div>;
 
   return (
     <div style={styles.container}>
