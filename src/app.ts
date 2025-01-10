@@ -29,6 +29,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend/dist", "index.html"));
 });
 // endpoint for /user
+app.use("/user", userRouter);
+
+
 app.use("/items", itemRoutes);
 app.use("/table", tableRouter);
 app.use("/reservation", reservationRouter);

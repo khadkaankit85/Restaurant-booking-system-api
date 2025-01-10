@@ -1,115 +1,111 @@
-import React, { CSSProperties, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchRole } from "../utils/Tools";
+import "./mycss.css";
+import Navigation from "./Navigation";
+import Slider from "react-animated-slider";
+import "react-animated-slider/build/horizontal.css";
 
 export const LandingPage: React.FC = () => {
   const [isloading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function roleChecker() {
       try {
         const role = await fetchRole();
         if (role >= 1) navigate("/home");
-        else {
-          setIsLoading(false);
-          return;
-        }
       } catch (e) {
         console.log(e);
         setIsLoading(false);
       }
     }
     roleChecker();
-  });
+  }, []);
+
+  const slides = [
+    {
+      img: "/image/image1 (4).jpeg"
+    },
+    {
+      img: "/image/image1 (2).jpeg"
+    },
+    {
+      img: "/image/image1 (3).jpeg"
+    }
+  ];
+
+  const menue = [
+    {
+      title: "Breakfast",
+      description: "View Menu",
+      img: "/image/breakfast.webp"
+    },
+    {
+      title: "Lunch",
+      description: "View Menu",
+      img: "/image/lunch.jpg"
+    },
+    {
+      title: "Dinner",
+      description: "View Menu",
+      img: "/image/dinner.jpg"
+    }
+  ];
 
   if (isloading) return <div></div>;
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card as unknown as CSSProperties}>
-        <h1 style={styles.heading}>Restaurant Management System</h1>
-        <p style={styles.description}>
-          Welcome to the ultimate restaurant management experience. Manage
-          reservations, orders, and staff seamlessly with our intuitive API
-          platform.
-        </p>
-        <div style={styles.buttonGroup}>
-          <Link
-            to="/login"
-            style={
-              {
-                ...styles.button,
-                ...styles.primaryButton,
-              } as unknown as CSSProperties
-            }
-          >
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            style={
-              {
-                ...styles.button,
-                ...styles.secondaryButton,
-              } as unknown as CSSProperties
-            }
-          >
-            Sign Up
-          </Link>
+    <>
+      <Navigation />
+      <h1 className="text-cyan-800 font-bold text-3xl text-center tracking-widen hover">
+        Enjoy a meal with HamroResturant
+      </h1>
+      <Slider autoplay={1000}>
+        {slides.map((slide, index) => (
+          <div key={index} className="slider-content">
+            <img src={slide.img} className="slider-image" alt={`slide-${index}`} />
+          </div>
+        ))}
+      </Slider>
+
+      <div className="big-container">
+        <div className="offerPart flex text-cyan-800 font-bold flex-col flex-wrap gap-y-5 gap-x-5 text-center">
+          <h1 className="detail">We Offer Top Notch</h1>
+          <p className="explain">
+            We are a five-star rated restaurant serving delicious food for the
+            past 5 years. You can enjoy all the best food in one place.
+          </p>
         </div>
       </div>
-    </div>
-  );
-};
 
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f5f5f5",
-  },
-  card: {
-    backgroundColor: "#fff",
-    padding: "20px 30px",
-    borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-    maxWidth: "500px",
-  },
-  heading: {
-    color: "#333",
-    fontSize: "28px",
-    marginBottom: "15px",
-  },
-  description: {
-    color: "#555",
-    fontSize: "16px",
-    marginBottom: "20px",
-  },
-  buttonGroup: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "10px",
-  },
-  button: {
-    padding: "10px 15px",
-    fontSize: "16px",
-    borderRadius: "4px",
-    textDecoration: "none",
-    textAlign: "center",
-    display: "block",
-    width: "100%",
-  },
-  primaryButton: {
-    backgroundColor: "#007BFF",
-    color: "#fff",
-    border: "none",
-  },
-  secondaryButton: {
-    backgroundColor: "#6c757d",
-    color: "#fff",
-    border: "none",
-  },
+      <div className="menu-container">
+        {menue.map((item, index) => (
+          <div key={index} className="menu-item">
+            <img src={item.img} alt={item.title} />
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <hr />
+
+      <div className="about">
+        <img src="/image/leaf.jpg" alt="leaf" />
+        <h1 className="aboutDetails">Check Who we are</h1>
+        <p className="aboutDetails">
+          We are a five-star rated restaurant serving delicious food for the
+          past 5 years. You can enjoy all the best food in one place.
+        </p>
+        <h1 className="aboutDetails">Book Through Call</h1>
+        <p className="phone">437-234-121</p>
+        <img src="/image/image1 (4).jpeg" alt="aboutUs" className="aboutUs" />
+      </div>
+
+      <div className="footer">
+        <p>© 2021 HamroResturant</p>
+      </div>
+    </>
+  );
 };
