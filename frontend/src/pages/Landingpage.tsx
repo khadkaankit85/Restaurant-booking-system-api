@@ -7,6 +7,7 @@ import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
 
 export const LandingPage: React.FC = () => {
+  const [isloading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export const LandingPage: React.FC = () => {
         if (role >= 1) navigate("/home");
       } catch (e) {
         console.log(e);
-        console.log("not logged in");
+        setIsLoading(false);
       }
     }
     roleChecker();
@@ -51,6 +52,8 @@ export const LandingPage: React.FC = () => {
       img: "/image/dinner.jpg"
     }
   ];
+
+  if (isloading) return <div></div>;
 
   return (
     <>

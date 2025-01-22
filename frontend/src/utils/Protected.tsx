@@ -70,7 +70,7 @@ export const Protected = ({ children, role }: ProtectedProp) => {
     handleProtected();
   });
 
-  if (!userInformation || !userInformation.role) return <h1>Loading...</h1>;
+  if (!userInformation || !userInformation.role) return <h1></h1>;
   if (requiredRole > currentRole) return <h1>Access Denied</h1>;
   return <>{children}</>;
 };
