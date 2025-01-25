@@ -58,7 +58,7 @@ export const LandingPage: React.FC = () => {
   return (
     <>
       <Navigation />
-      <h1 className="text-cyan-800 font-bold text-3xl text-center tracking-widen hover">
+      <h1 className="text-cyan-800 font-bold text-3xl text-center tracking-widen hover mt-20">
         Enjoy a meal with HamroResturant
       </h1>
       <Slider autoplay={1000}>
