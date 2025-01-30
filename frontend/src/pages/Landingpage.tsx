@@ -4,9 +4,12 @@ import { fetchRole } from "../utils/Tools";
 import "./mycss.css";
 import Navigation from "./Navigation";
 import Slider from "react-animated-slider";
+
+
 import "react-animated-slider/build/horizontal.css";
 
 export const LandingPage: React.FC = () => {
+ 
   const [isloading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
 
@@ -25,13 +28,13 @@ export const LandingPage: React.FC = () => {
 
   const slides = [
     {
-      img: "/image/image1 (4).jpeg"
+      img: "image1.jpg"
     },
     {
-      img: "/image/image1 (2).jpeg"
+      img: "image2.jpg"
     },
     {
-      img: "/image/image1 (3).jpeg"
+      img: "image3.jpg"
     }
   ];
 
@@ -57,8 +60,9 @@ export const LandingPage: React.FC = () => {
 
   return (
     <>
-      <Navigation />
-      <h1 className="text-cyan-800 font-bold text-3xl text-center tracking-widen hover mt-20">
+    <div className="home bg-lime-950 text-white">
+    <Navigation />
+      <h1 className="text-white-800 font-bold text-3xl text-center tracking-widen hover mt-20">
         Enjoy a meal with HamroResturant
       </h1>
       <Slider autoplay={1000}>
@@ -70,7 +74,7 @@ export const LandingPage: React.FC = () => {
       </Slider>
 
       <div className="big-container">
-        <div className="offerPart flex text-cyan-800 font-bold flex-col flex-wrap gap-y-5 gap-x-5 text-center">
+        <div className="offerPart flex text-white-600 font-bold flex-col flex-wrap gap-y-5 gap-x-5 text-center">
           <h1 className="detail">We Offer Top Notch</h1>
           <p className="explain">
             We are a five-star rated restaurant serving delicious food for the
@@ -106,6 +110,8 @@ export const LandingPage: React.FC = () => {
       <div className="footer">
         <p>© 2021 HamroResturant</p>
       </div>
+    </div>
+      
     </>
   );
 };

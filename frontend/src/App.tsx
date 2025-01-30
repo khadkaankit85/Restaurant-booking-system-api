@@ -4,14 +4,16 @@ import { SignUpPage } from "./pages/Signup";
 import { LandingPage } from "./pages/Landingpage";
 import { Homepage } from "./pages/Homepage";
 import { Protected } from "./utils/Protected";
+import Contact from "./pages/contact"; 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/signup" element={<SignUpPage />}></Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/contact" element={<Contact />} /> {/* Correctly imported */}
         <Route
           path="/home"
           element={
@@ -19,7 +21,7 @@ function App() {
               <Homepage />
             </Protected>
           }
-        ></Route>
+        />
       </Routes>
     </BrowserRouter>
   );
