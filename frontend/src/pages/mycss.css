@@ -3,16 +3,16 @@
   @apply m-0 p-0;
 }
 
-.logo {
-  @apply w-[80px] h-auto m-2;
-}
+/* .logo {
+  @apply w-[60px] h-auto m-2;
+} */
 
 .nav {
   @apply flex items-center justify-between text-black;
 }
 
 .li {
-  @apply list-none text-cyan-800 hover:text-cyan-600;
+  @apply list-none text-white hover:text-white;
 }
 .slider-content {
   text-align: center;

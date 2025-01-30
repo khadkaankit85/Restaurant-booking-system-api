@@ -33,7 +33,6 @@ export const SignUpPage: React.FC = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      //@ts-ignore
       const response = await axios.post("user/signup", data);
       if (response.status === 201) {
         alert("Registered successfully! please proceed to login");
