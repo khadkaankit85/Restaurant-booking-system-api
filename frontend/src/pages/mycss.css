@@ -1,4 +1,17 @@
 /* styles.css */
+@font-face { font-family: rufinaB; 
+  src: url('./../assets/Rufina/Rufina-Bold.ttf');
+}
+@font-face { font-family: rufinaR; 
+  src: url('./../assets/Rufina/Rufina-Regular.ttf');
+}
+.rufinaR{
+  font-family: rufinaR;
+}
+.rufinaB{
+  font-family: rufinaB;
+}
+
 .landingpagediv {
   @apply m-0 p-0;
 }
