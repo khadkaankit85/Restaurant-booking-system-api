@@ -7,8 +7,9 @@ export default {
         rufinar: "",
       },
       colors: {
-        lightGray: "#D8D4D4",
+        lightGray: "#FFFFFF",
         olive: "#EBF0E4",
+        background: "#233000",
       },
     },
   },

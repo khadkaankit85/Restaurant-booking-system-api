@@ -35,7 +35,7 @@ const Menu = () => {
           </div>
           <div className="image  w-1/2 h-full flex justify-end items-start">
             <img
-              src="../../public/image/imageLeaf.png"
+              src="/image/imageLeaf.png"
               alt="picture of leaf"
               className="size-96  right-[10px] "
             ></img>
@@ -59,27 +59,12 @@ const Menu = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-center justify-between bg-olive p-8">
-        {/* Left Image Section */}
-        <div className="relative">
+      <div className="flex flex-col lg:flex-row items-center justify-between h-3/5 bg-olive ">
+        <div className="h-full">
           <img
-            src="../../public/image/Leaf.png"
+            src="/image/manworking.jpg"
             alt="Decorative leaf"
-            className="absolute opacity-30 -z-2 left-0 w-30 "
-          />
-          <img
-            src="../../public/image/food.png"
-            alt="Chopping board with food"
-            className="w-48 rounded-lg shadow-lg"
-          />
-        </div>
-
-        {/* Chef Image Section */}
-        <div className="relative mt-8 lg:mt-0">
-          <img
-            src="../../public/image/Man.png"
-            alt="Chef preparing food"
-            className="w-64 rounded-lg shadow-lg"
+            className="h-full w-auto object-cover"
           />
         </div>
 
@@ -90,6 +75,13 @@ const Menu = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus lorem
             id penatibus blandit at purus auctor tincidunt lacus.
           </p>
+          <div className="secondLeaf">
+            <img
+              src="/image/Leaf2.png"
+              alt="second leaf"
+              className="absolute right-20 h-40 w-60"
+            />
+          </div>
         </div>
       </div>
     </>
