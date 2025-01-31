@@ -99,18 +99,6 @@ export const LandingPage: React.FC = () => {
         <hr />
         <Menue />
 
-        {/* <div className="about">
-        <img src="/image/leaf.jpg" alt="leaf" />
-        <h1 className="aboutDetails">Check Who we are</h1>
-        <p className="aboutDetails">
-          We are a five-star rated restaurant serving delicious food for the
-          past 5 years. You can enjoy all the best food in one place.
-        </p>
-        <h1 className="aboutDetails">Book Through Call</h1>
-        <p className="phone">437-234-121</p>
-        <img src="/image/image1 (4).jpeg" alt="aboutUs" className="aboutUs" />
-      </div> */}
-
         <div className="footer">
           <p>© 2021 HamroResturant</p>
         </div>
