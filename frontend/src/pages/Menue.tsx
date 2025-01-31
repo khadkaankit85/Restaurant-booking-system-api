@@ -1,20 +1,21 @@
-
 const Menu = () => {
   return (
     <>
-    <div className="firstLayer">
-      <div className="describtion">
-        <div className="menueSection">
-          <h1 className="section1">Our Menue</h1>
+      <div className="describtion flex h-[15rem] bg-white text-black  text-xl">
+        <div className="menueSection relative w-1/2 h-full  ">
+          <h1 className="section1 rufinaB font-bold text-2xl">Our Menue</h1>
           <p className="section2">Here is our famous food .</p>
-          <img src="/image/image.png" alt="picture of leaf"></img>
-        
+        </div>
+        <div className="image  w-1/2 h-full flex justify-end items-start">
+          <img
+            src="../../public/image/image.png"
+            alt="picture of leaf"
+            className="size-96  right-[10px] "
+          ></img>
         </div>
       </div>
-    </div>
     </>
-  
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

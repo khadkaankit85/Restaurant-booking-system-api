@@ -4,6 +4,7 @@ import { fetchRole } from "../utils/Tools";
 import "./mycss.css";
 import Navigation from "./Navigation";
 import Slider from "react-animated-slider";
+import Menue from "./Menue";
 
 
 import "react-animated-slider/build/horizontal.css";
@@ -60,7 +61,7 @@ export const LandingPage: React.FC = () => {
 
   return (
     <>
-    <div className="home bg-lime-950 text-white">
+    <div className="home bg-green-950 text-white">
     <Navigation />
       <h1 className="text-white-800 font-bold text-3xl text-center tracking-widen hover mt-20">
         Enjoy a meal with HamroResturant
@@ -94,8 +95,9 @@ export const LandingPage: React.FC = () => {
       </div>
 
       <hr />
+      <Menue/>
 
-      <div className="about">
+      {/* <div className="about">
         <img src="/image/leaf.jpg" alt="leaf" />
         <h1 className="aboutDetails">Check Who we are</h1>
         <p className="aboutDetails">
@@ -105,7 +107,7 @@ export const LandingPage: React.FC = () => {
         <h1 className="aboutDetails">Book Through Call</h1>
         <p className="phone">437-234-121</p>
         <img src="/image/image1 (4).jpeg" alt="aboutUs" className="aboutUs" />
-      </div>
+      </div> */}
 
       <div className="footer">
         <p>© 2021 HamroResturant</p>
