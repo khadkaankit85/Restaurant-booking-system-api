@@ -29,11 +29,12 @@ export const ChangePasswordPage: React.FC = () => {
 
   const onSubmit = async (data: ChangePasswordFormData) => {
     try {
-      //@ts-ignore
       const response = await axios.put("/user/change-password", data);
-      alert("Password updated successfully!");
-    } catch (error: any) {
-      alert("Error: " + (error.response?.data?.errors || error.message));
+      console.log(response);
+
+      alert("Password updated successfully! ");
+    } catch (error) {
+      console.log("error: ", error);
     }
   };
 

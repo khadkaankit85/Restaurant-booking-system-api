@@ -53,9 +53,8 @@ export const LoginPage: React.FC = () => {
       } else {
         alert("Internal server error occurred");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
-      alert("Error: " + (error.response?.data?.errors || error.message));
     }
   };
 
