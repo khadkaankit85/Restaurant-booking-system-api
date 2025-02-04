@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { fetchRole } from "../utils/Tools";
 import "./mycss.css";
 import Navigation from "./Navigation";
-//@ts-expect-error there is no types available for react-animated-slider library
 import Slider from "react-animated-slider";
 import Menue from "./Menue";
 
