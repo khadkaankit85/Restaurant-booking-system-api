@@ -1,16 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchRole } from "../utils/Tools";
 import "./mycss.css";
 import Navigation from "./Navigation";
-import Slider from "react-animated-slider";
 import Menue from "./Menue";
-
-import "react-animated-slider/build/horizontal.css";
 
 export const LandingPage: React.FC = () => {
   const [isloading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
+  const autoplay = 3000;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, autoplay);
+
+    return () => clearInterval(interval);
+  });
 
   useEffect(() => {
     async function roleChecker() {
@@ -64,18 +73,22 @@ export const LandingPage: React.FC = () => {
         <h1 className="text-white-800 font-bold text-3xl text-center tracking-widen hover mt-20">
           Enjoy a meal with HamroResturant
         </h1>
-        <Slider autoplay={1000}>
-          {slides.map((slide, index) => (
-            <div key={index} className="slider-content">
-              <img
-                src={slide.img}
-                className="slider-image"
-                alt={`slide-${index}`}
-              />
-            </div>
-          ))}
-        </Slider>
-
+        <div className="slider">
+          <div
+            className="slider-track"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {slides.map((slide, index) => (
+              <div key={index} className="slider-content">
+                <img
+                  src={slide.img}
+                  className="slider-image"
+                  alt={`slide-${index}`}
+                />
+              </div>
+            ))}
+          </div>
+        </div>{" "}
         <div className="big-container">
           <div className="offerPart flex text-white-600 font-bold flex-col flex-wrap gap-y-5 gap-x-5 text-center">
             <h1 className="detail">We Offer Top Notch</h1>
@@ -85,7 +98,6 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
         </div>
-
         <div className="menu-container">
           {menue.map((item, index) => (
             <div key={index} className="menu-item">
@@ -95,10 +107,8 @@ export const LandingPage: React.FC = () => {
             </div>
           ))}
         </div>
-
         <hr />
         <Menue />
-
         <div className="footer">
           <p>© 2021 HamroResturant</p>
         </div>
