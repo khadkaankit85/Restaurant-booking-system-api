@@ -5,5 +5,5 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   //base: "./Restaurant-booking-system-api",
-  base: "./",
+  //base: "./",
 });
