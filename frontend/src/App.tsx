@@ -4,16 +4,20 @@ import { SignUpPage } from "./pages/Signup";
 import { LandingPage } from "./pages/Landingpage";
 import { Homepage } from "./pages/Homepage";
 import { Protected } from "./utils/Protected";
-import Contact from "./pages/contact"; 
+import Contact from "./pages/contact";
+import { IS_PRODUCTION } from "./configs";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      basename={IS_PRODUCTION ? "/Restaurant-booking-system-api/" : "/"}
+    >
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/contact" element={<Contact />} /> {/* Correctly imported */}
+        <Route path="/contact" element={<Contact />} />{" "}
+        {/* Correctly imported */}
         <Route
           path="/home"
           element={
