@@ -35,7 +35,7 @@ const Menu = () => {
           </div>
           <div className="image  w-1/2 h-full flex justify-end items-start">
             <img
-              src="/image/imageLeaf.png"
+              src="imageLeaf.png"
               alt="picture of leaf"
               className="size-96  right-[10px] "
             ></img>
@@ -62,7 +62,7 @@ const Menu = () => {
       <div className="flex flex-col lg:flex-row items-center justify-between h-3/5 bg-olive ">
         <div className="h-full">
           <img
-            src="/image/manworking.jpg"
+            src="manworking.jpg"
             alt="Decorative leaf"
             className="h-full w-auto object-cover"
           />
@@ -77,7 +77,7 @@ const Menu = () => {
           </p>
           <div className="secondLeaf">
             <img
-              src="/image/Leaf2.png"
+              src="Leaf2.png"
               alt="second leaf"
               className="absolute right-20 h-40 w-60"
             />

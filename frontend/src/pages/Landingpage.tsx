@@ -50,17 +50,17 @@ export const LandingPage: React.FC = () => {
     {
       title: "Breakfast",
       description: "View Menu",
-      img: "/image/breakfast.webp",
+      img: "breakfast.webp",
     },
     {
       title: "Lunch",
       description: "View Menu",
-      img: "/image/lunch.jpg",
+      img: "lunch.jpg",
     },
     {
       title: "Dinner",
       description: "View Menu",
-      img: "/image/dinner.jpg",
+      img: "dinner.jpg",
     },
   ];
 
